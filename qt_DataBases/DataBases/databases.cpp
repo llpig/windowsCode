@@ -36,6 +36,54 @@ void DataBases::on_DB_select_clicked()
 {
     //查询
     SqlOperationDialogBox("查询",ui->DB_comboBox_tableName->currentText());
+    //将对话框中内容拼接为sql语句
+    QString sqlStr="select ",selectStr="",condStr="";
+
+    for(int i=0;i<sqlVector.size();++i)
+    {
+        if(sqlVector[i][1].isEmpty())
+        {
+            selectStr+=sqlVector[i][0];
+            selectStr+=",";
+        }
+        else
+        {
+            condStr+=sqlVector[i][0];
+            condStr+=" like ";
+            condStr=condStr+"'%"+sqlVector[i][1]+"%'";
+            condStr+=" and ";
+        }
+    }
+    //保存需要查询内容
+    selectStr[selectStr.length()-1]=' ';
+    sqlStr+=selectStr;
+    sqlStr+="from ";
+    sqlStr+=ui->DB_comboBox_tableName->currentText();
+    //保存查询条件
+    condStr.remove(condStr.length()-4,4);
+    condStr=" where "+condStr;
+    sqlStr+=condStr;
+    sqlVector.clear();
+    QStringList strList=selectStr.split(',');
+    //计算本次共查询了几个内容
+    int selectNum=strList.length();
+    for(int i=0;i<selectNum;++i)
+    {
+        ui->DB_show->textCursor().insertText(strList[i]+" ");
+    }
+    ui->DB_show->textCursor().insertText("\n");
+    query->exec(sqlStr);
+    while(query->next())
+    {
+        for(int i=0;i<selectNum;++i)
+        {
+
+            ui->DB_show->textCursor().insertText(query->value(i).toString()+" ");
+            qDebug()<<strList[i]<<":"<<query->value(i).toString()+" ";
+        }
+        ui->DB_show->textCursor().insertText("\n");
+        qDebug()<<endl;
+    }
 }
 
 void DataBases::on_DB_update_clicked()
@@ -97,39 +145,51 @@ void DataBases::selectTable()
 void DataBases::SqlOperationDialogBox(QString opName,QString tableName)
 {
     QMessageBox *dialogBox=new QMessageBox(this);
-    dialogBox->setMinimumWidth(200);
+    //设置自定义对话框的主题名
+    dialogBox->setWindowTitle(opName);
+    dialogBox->adjustSize();
     //创建一个条形框的数组，用例保存创建出的条形框
     QVector<QLineEdit*> lineEditVector;
-    //设置自定义框的主题名
-    dialogBox->setWindowTitle(opName);
     QString sqlStr="DESCRIBE "+tableName;
     query->exec(sqlStr);
+    int maxLabelWidth=0,labelHeight=0;
     while(query->next())
     {
         //将组件绑定在父控件上，当父空间被销毁时，子控件会自动被销毁
         QLabel *label=new QLabel(dialogBox);
-        label->setText(query->value(0).toString());
         QLineEdit *lineEdit=new QLineEdit(dialogBox);
+        label->setText(query->value(0).toString());
+        //标签会根据文本自动调节大小
+        label->adjustSize();
+        maxLabelWidth=max(maxLabelWidth,label->width());
+        labelHeight=label->height();
+        label->setGeometry(0,lineEditVector.size()*(label->height()+5),label->width(),label->height());
+        //将条形框添加入数组
         lineEdit->setObjectName(label->text());
-        label->setGeometry(0,lineEditVector.size()*20,100,15);
-        lineEdit->setGeometry(110,lineEditVector.size()*20,50,15);
         lineEditVector.push_back(lineEdit);
     }
-
+    for(int i=0;i<lineEditVector.size();++i)
+    {
+        lineEditVector[i]->setGeometry(maxLabelWidth+5,i*(labelHeight+5),100,labelHeight);
+    }
     QPushButton *commitButton=dialogBox->addButton(tr("commit"),QMessageBox::ActionRole);
+    commitButton->adjustSize();
     QPushButton *quitButton=dialogBox->addButton(QMessageBox::Cancel);
+    quitButton->adjustSize();
     dialogBox->exec();
     if(dialogBox->clickedButton()==commitButton)
     {
         //将框中的数据转为sql语句请执行
+        sqlVector.resize(lineEditVector.size());
         for(int i=0;i<lineEditVector.size();++i)
         {
-            qDebug()<<lineEditVector[i]->objectName()<<":"<<lineEditVector[i]->text()<<endl;
+            sqlVector[i].resize(2);
+            sqlVector[i][0]=lineEditVector[i]->objectName();
+            sqlVector[i][1]=lineEditVector[i]->text();
         }
     }
-    if(dialogBox->clickedButton()==quitButton)
-    {
-        //取消操作
-    }
+
+    delete commitButton;
+    delete quitButton;
     delete dialogBox;
 }

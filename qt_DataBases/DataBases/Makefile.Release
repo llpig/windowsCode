@@ -114,10 +114,10 @@ compiler_rcc_clean:
 compiler_moc_header_make_all: release/moc_databases.cpp release/moc_dblogin.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) release/moc_databases.cpp release/moc_dblogin.cpp
-release/moc_databases.cpp: D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qwidget.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+release/moc_databases.cpp: D:/QtCreator/5.4/mingw491_32/include/QtCore/QFile \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfile.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfiledevice.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qiodevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qglobal.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qconfig.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfeatures.h \
@@ -146,11 +146,10 @@ release/moc_databases.cpp: D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainW
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmutex.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobjectdefs.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qnamespace.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobjectdefs_impl.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstring.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qchar.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qbytearray.h \
@@ -168,22 +167,46 @@ release/moc_databases.cpp: D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainW
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontainerfwd.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qisenum.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject_impl.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVector \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvector.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpoint.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdebug.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qhash.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpair.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmap.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qtextstream.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qlocale.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvariant.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringlist.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdatastream.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregexp.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qshareddata.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qset.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlQuery \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlquery.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QSettings \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsettings.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qdialog.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qwidget.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmargins.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpaintdevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qrect.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsize.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpoint.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpalette.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qcolor.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qrgb.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringlist.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdatastream.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qiodevice.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpair.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregexp.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qbrush.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvector.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qmatrix.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpolygon.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qregion.h \
@@ -194,8 +217,6 @@ release/moc_databases.cpp: D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainW
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpixelformat.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpixmap.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsharedpointer.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qshareddata.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qhash.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsharedpointer_impl.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qfont.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qfontmetrics.h \
@@ -204,27 +225,21 @@ release/moc_databases.cpp: D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainW
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qcursor.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qkeysequence.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qevent.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvariant.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmap.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdebug.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qtextstream.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qlocale.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qset.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qurl.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qurlquery.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfile.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qicon.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QMap \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/QFont \
+		dblogin.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QDialog \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QString \
+		databases.h \
 		databases.h
 	'D:\QtCreator\5.4\mingw491_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -ID:/QtCreator/5.4/mingw491_32/mkspecs/win32-g++ -IE:/Code/qt_DataBases/DataBases -ID:/QtCreator/5.4/mingw491_32/include -ID:/QtCreator/5.4/mingw491_32/include/QtWidgets -ID:/QtCreator/5.4/mingw491_32/include/QtGui -ID:/QtCreator/5.4/mingw491_32/include/QtSql -ID:/QtCreator/5.4/mingw491_32/include/QtCore databases.h -o release/moc_databases.cpp
 
@@ -332,17 +347,28 @@ release/moc_dblogin.cpp: D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QDialog 
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/QString \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QSettings \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsettings.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QFile \
 		databases.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVector \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlQuery \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlquery.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qicon.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QMap \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/QFont \
+		dblogin.h \
 		dblogin.h
 	'D:\QtCreator\5.4\mingw491_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -ID:/QtCreator/5.4/mingw491_32/mkspecs/win32-g++ -IE:/Code/qt_DataBases/DataBases -ID:/QtCreator/5.4/mingw491_32/include -ID:/QtCreator/5.4/mingw491_32/include/QtWidgets -ID:/QtCreator/5.4/mingw491_32/include/QtGui -ID:/QtCreator/5.4/mingw491_32/include/QtSql -ID:/QtCreator/5.4/mingw491_32/include/QtCore dblogin.h -o release/moc_dblogin.cpp
 
@@ -370,10 +396,10 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 ####### Compile
 
 release/main.o: main.cpp databases.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qwidget.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QFile \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfile.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfiledevice.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qiodevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qglobal.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qconfig.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfeatures.h \
@@ -402,11 +428,10 @@ release/main.o: main.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmutex.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobjectdefs.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qnamespace.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobjectdefs_impl.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstring.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qchar.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qbytearray.h \
@@ -424,22 +449,46 @@ release/main.o: main.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontainerfwd.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qisenum.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject_impl.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVector \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvector.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpoint.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdebug.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qhash.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpair.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmap.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qtextstream.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qlocale.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvariant.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringlist.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdatastream.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregexp.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qshareddata.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qset.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlQuery \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlquery.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QSettings \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsettings.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qdialog.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qwidget.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmargins.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpaintdevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qrect.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsize.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpoint.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpalette.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qcolor.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qrgb.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringlist.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdatastream.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qiodevice.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpair.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregexp.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qbrush.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvector.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qmatrix.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpolygon.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qregion.h \
@@ -450,8 +499,6 @@ release/main.o: main.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpixelformat.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpixmap.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsharedpointer.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qshareddata.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qhash.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsharedpointer_impl.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qfont.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qfontmetrics.h \
@@ -460,30 +507,19 @@ release/main.o: main.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qcursor.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qkeysequence.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qevent.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvariant.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmap.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdebug.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qtextstream.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qlocale.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qset.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qurl.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qurlquery.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfile.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qicon.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QMap \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/QFont \
 		dblogin.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QDialog \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qdialog.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/QString \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QApplication \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qapplication.h \
@@ -495,10 +531,10 @@ release/main.o: main.cpp databases.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o main.cpp
 
 release/databases.o: databases.cpp databases.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qwidget.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QFile \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfile.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfiledevice.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qiodevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qglobal.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qconfig.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfeatures.h \
@@ -527,11 +563,10 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qglobalstatic.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmutex.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qnumeric.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobjectdefs.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qnamespace.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobjectdefs_impl.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstring.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qchar.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qbytearray.h \
@@ -549,22 +584,46 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontainerfwd.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qisenum.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qobject_impl.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVector \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvector.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpoint.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdebug.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qhash.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpair.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmap.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qtextstream.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qlocale.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvariant.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringlist.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdatastream.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregexp.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qshareddata.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qset.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlQuery \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlquery.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QSettings \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsettings.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qdialog.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qwidget.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qwindowdefs_win.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmargins.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpaintdevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qrect.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsize.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpoint.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpalette.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qcolor.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qrgb.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringlist.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdatastream.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qiodevice.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qpair.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregexp.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qstringmatcher.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qbrush.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvector.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qmatrix.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpolygon.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qregion.h \
@@ -575,8 +634,6 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpixelformat.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpixmap.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsharedpointer.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qshareddata.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qhash.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsharedpointer_impl.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qfont.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qfontmetrics.h \
@@ -585,27 +642,20 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qcursor.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qkeysequence.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qevent.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qvariant.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qmap.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qdebug.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qtextstream.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qlocale.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qset.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcontiguouscache.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qurl.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/qurlquery.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfile.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qicon.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QMap \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/QFont \
+		dblogin.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QDialog \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QString \
 		ui_databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVariant \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QAction \
@@ -620,13 +670,8 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qinputmethod.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QButtonGroup \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qbuttongroup.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QHeaderView \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qframe.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qabstractitemmodel.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/qitemselectionmodel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QComboBox \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qcombobox.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractitemdelegate.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qstyleoption.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractspinbox.h \
@@ -637,6 +682,21 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qstyle.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qabstractitemmodel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QHeaderView \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qitemselectionmodel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QLabel \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qlabel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QLineEdit \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qlineedit.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpen.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextoption.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMenuBar \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmenu.h \
@@ -648,10 +708,6 @@ release/databases.o: databases.cpp databases.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QTextEdit \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextdocument.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextoption.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextcursor.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextformat.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpen.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QToolBar \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtoolbar.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QWidget
@@ -762,18 +818,69 @@ release/dblogin.o: dblogin.cpp dblogin.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtCore/QString \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QSettings \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qsettings.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QFile \
 		databases.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVector \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlQuery \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlquery.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QMainWindow \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		D:/QtCreator/5.4/mingw491_32/include/QtGui/qicon.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlDatabase \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqldatabase.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsql.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/QSqlError \
-		D:/QtCreator/5.4/mingw491_32/include/QtSql/qsqlerror.h \
-		D:/QtCreator/5.4/mingw491_32/include/QtCore/QtDebug \
-		ui_dblogin.h
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QMap \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/QFont \
+		ui_dblogin.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/QVariant \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QAction \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QApplication \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qapplication.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qeventloop.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qdesktopwidget.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qguiapplication.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qinputmethod.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QButtonGroup \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qbuttongroup.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QHeaderView \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qabstractitemmodel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qitemselectionmodel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractitemdelegate.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qstyleoption.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractspinbox.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qvalidator.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtCore/qregularexpression.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qslider.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractslider.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qstyle.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QLabel \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qlabel.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QLineEdit \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qlineedit.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qpen.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/QPushButton \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
+		D:/QtCreator/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/dblogin.o dblogin.cpp
 
 release/moc_databases.o: release/moc_databases.cpp 

@@ -10,7 +10,11 @@
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QMainWindow>
+#include <QMap>
+#include <QFont>
+#include <algorithm>
 #include "dblogin.h"
+using namespace std;
 
 namespace Ui {
 class DataBases;
@@ -41,6 +45,8 @@ private:
     Ui::DataBases *ui;
     QSqlDatabase *DB_Mysql;//数据库指针
     QSqlQuery *query;//数据库执行指针
+    QVector<QVector<QString> > sqlVector;//用于保存（插入、删除、更改）的对话框信息
+    QVector<QVector<QVector<QString> > > updateSqlVector;//用户保存更新的对话框信息
     static QString configFileName;//配置文件名称
 
     //创建配置文件
