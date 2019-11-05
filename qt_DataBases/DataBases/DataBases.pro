@@ -15,10 +15,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         databases.cpp \
-    dblogin.cpp
+    dblogin.cpp \
+    custommessagebox.cpp
 
 HEADERS  += databases.h \
-    dblogin.h
+    dblogin.h \
+    custommessagebox.h
 
 FORMS    += databases.ui \
     dblogin.ui

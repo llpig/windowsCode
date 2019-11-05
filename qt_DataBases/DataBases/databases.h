@@ -13,7 +13,10 @@
 #include <QMap>
 #include <QFont>
 #include <algorithm>
+#include <QGroupBox>
 #include "dblogin.h"
+#include "custommessagebox.h"
+
 using namespace std;
 
 namespace Ui {
@@ -53,8 +56,12 @@ private:
     void createConfigFile();
     //查询当前数据中的表，并将表名写入下拉框
     void selectTable();
-    //创建数据库操作的对话框
+    //创建数据库操作的对话框(查询，删除，插入)
     bool SqlOperationDialogBox(QString opName, QString tableName);
+    //创建数据库更新操作的对话框
+    bool updateOperationDialogBox(QString tableName);
+    //获取表的描述
+    QStringList getTabelDescribe(QString tableName);
 };
 
 #endif // DATABASES_H

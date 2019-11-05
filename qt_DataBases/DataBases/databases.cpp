@@ -90,7 +90,8 @@ void DataBases::on_DB_select_clicked()
 void DataBases::on_DB_update_clicked()
 {
     //更新（更新存在旧值和新值的替换关系，所以需要一个新的自定义控件）
-    //增加一个添加表的功能
+//    QString tableName=ui->DB_comboBox_tableName->currentText();
+//    updateOperationDialogBox(tableName);
 }
 
 void DataBases::on_DB_add_clicked()
@@ -190,38 +191,37 @@ void DataBases::selectTable()
 
 bool DataBases::SqlOperationDialogBox(QString opName,QString tableName)
 {
-    QMessageBox *dialogBox=new QMessageBox(this);
+    int messageBoxWidth,messageBoxHeight;
+    int maxLabelWidth=0,labelHeight=0;
+    CustomMessageBox *dialogBox=new CustomMessageBox();
     //设置自定义对话框的主题名
     dialogBox->setWindowTitle(opName);
-    dialogBox->adjustSize();
     //创建一个条形框的数组，用例保存创建出的条形框
     QVector<QLineEdit*> lineEditVector;
-    QString sqlStr="DESCRIBE "+tableName;
-    query->exec(sqlStr);
-    int maxLabelWidth=0,labelHeight=0;
-    while(query->next())
-    {
-        //将组件绑定在父控件上，当父空间被销毁时，子控件会自动被销毁
+    QStringList sqlResult=getTabelDescribe(tableName);
+
+     //将组件绑定在父控件上，当父空间被销毁时，子控件会自动被销毁
         QLabel *label=new QLabel(dialogBox);
         QLineEdit *lineEdit=new QLineEdit(dialogBox);
         label->setText(query->value(0).toString());
         //标签会根据文本自动调节大小
-        label->adjustSize();
         maxLabelWidth=max(maxLabelWidth,label->width());
         labelHeight=label->height();
         label->setGeometry(0,lineEditVector.size()*(label->height()+5),label->width(),label->height());
         //将条形框添加入数组
         lineEdit->setObjectName(label->text());
         lineEditVector.push_back(lineEdit);
-    }
     for(int i=0;i<lineEditVector.size();++i)
     {
-        lineEditVector[i]->setGeometry(maxLabelWidth+5,i*(labelHeight+5),100,labelHeight);
+        lineEditVector[i]->setGeometry(maxLabelWidth+20,i*(labelHeight+5),100,labelHeight);
     }
     QPushButton *commitButton=dialogBox->addButton(tr("commit"),QMessageBox::ActionRole);
     commitButton->adjustSize();
     QPushButton *quitButton=dialogBox->addButton(QMessageBox::Cancel);
     quitButton->adjustSize();
+    messageBoxWidth=maxLabelWidth+150;
+    messageBoxHeight=lineEditVector.size()*(labelHeight+5)+50;
+    dialogBox->adjustWindowSize(messageBoxWidth,messageBoxHeight);
     dialogBox->exec();
     sqlVector.resize(0);
     if(dialogBox->clickedButton()==commitButton)
@@ -243,3 +243,73 @@ bool DataBases::SqlOperationDialogBox(QString opName,QString tableName)
     ui->DB_show->clear();
     return ((sqlVector.size()==0)?false:true);
 }
+
+bool DataBases::updateOperationDialogBox(QString tableName)
+{
+    QMessageBox *upDateDialog=new QMessageBox(this);
+    upDateDialog->setWindowTitle("更新");
+    upDateDialog->adjustSize();
+    QLabel *newLabel=new QLabel(upDateDialog);
+    QLabel *oldLabel=new QLabel(upDateDialog);
+    newLabel->setText("new");
+    newLabel->adjustSize();
+    oldLabel->setText("old");
+    oldLabel->adjustSize();
+    QVector<QLineEdit*> oldLineEditVector;
+    QVector<QLineEdit*> newLineEditVector;
+    QString sqlStr="DESCRIBE "+tableName;
+    query->exec(sqlStr);
+    int maxLabelWidth=0,labelHeight=0;
+    while(query->next())
+    {
+        QLabel *label=new QLabel(upDateDialog);
+        QLineEdit *oldLineEdit=new QLineEdit(upDateDialog);
+        QLineEdit *newLineEdit=new QLineEdit(upDateDialog);
+        label->setText(query->value(0).toString());
+
+        oldLineEdit->setObjectName("old_"+label->text());
+        oldLineEditVector.push_back(oldLineEdit);
+        newLineEdit->setObjectName("new_"+label->text());
+        newLineEditVector.push_back(newLineEdit);
+        label->adjustSize();
+        maxLabelWidth=max(maxLabelWidth,label->width());
+        labelHeight=label->height();
+        label->setGeometry(0,oldLineEditVector.size()*(label->height()+5),label->width(),label->height());
+
+    }
+    for(int i=0;i<newLineEditVector.size();++i)
+    {
+        oldLineEditVector[i]->setGeometry(maxLabelWidth+5,(i+1)*(labelHeight+5),50,labelHeight);
+        newLineEditVector[i]->setGeometry(maxLabelWidth+60,(i+1)*(labelHeight+5),50,labelHeight);
+    }
+
+    oldLabel->setGeometry(maxLabelWidth+5,0,oldLabel->width(),oldLabel->height());
+    newLabel->setGeometry(maxLabelWidth+60,0,newLabel->width(),newLabel->height());
+
+    QPushButton *commitButton=upDateDialog->addButton(tr("commit"),QMessageBox::ActionRole);
+    commitButton->adjustSize();
+    QPushButton *quitButton=upDateDialog->addButton(QMessageBox::Cancel);
+    quitButton->adjustSize();
+
+    qDebug()<<upDateDialog->sizeHint().width()<<":"<<upDateDialog->sizeHint().height()<<endl;
+    //对话框的长宽不能正常显示
+
+    upDateDialog->exec();
+
+
+    delete upDateDialog;
+    return true;
+}
+
+QStringList DataBases::getTabelDescribe(QString tableName)
+{
+    QString sqlStr="Describe "+tableName;
+    QStringList sqlResult;
+    bool res=query->exec(sqlStr);
+    while(res&&query->next())
+    {
+        sqlResult.push_back(query->value(0).toString());
+    }
+    return sqlResult;
+}
+
