@@ -54,7 +54,7 @@ private:
     //查询当前数据中的表，并将表名写入下拉框
     void selectTable();
     //创建数据库操作的对话框
-    void SqlOperationDialogBox(QString opName, QString tableName);
+    bool SqlOperationDialogBox(QString opName, QString tableName);
 };
 
 #endif // DATABASES_H

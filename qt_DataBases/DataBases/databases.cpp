@@ -35,7 +35,10 @@ void DataBases::initWindow()
 void DataBases::on_DB_select_clicked()
 {
     //查询
-    SqlOperationDialogBox("查询",ui->DB_comboBox_tableName->currentText());
+    QString tableName=ui->DB_comboBox_tableName->currentText();
+    if(!SqlOperationDialogBox("查询",tableName))
+        return;
+
     //将对话框中内容拼接为sql语句
     QString sqlStr="select ",selectStr="",condStr="";
 
@@ -63,7 +66,6 @@ void DataBases::on_DB_select_clicked()
     condStr.remove(condStr.length()-4,4);
     condStr=" where "+condStr;
     sqlStr+=condStr;
-    sqlVector.clear();
     QStringList strList=selectStr.split(',');
     //计算本次共查询了几个内容
     int selectNum=strList.length();
@@ -77,13 +79,12 @@ void DataBases::on_DB_select_clicked()
     {
         for(int i=0;i<selectNum;++i)
         {
-
             ui->DB_show->textCursor().insertText(query->value(i).toString()+" ");
-            qDebug()<<strList[i]<<":"<<query->value(i).toString()+" ";
         }
         ui->DB_show->textCursor().insertText("\n");
-        qDebug()<<endl;
     }
+    sqlVector.clear();
+
 }
 
 void DataBases::on_DB_update_clicked()
@@ -95,14 +96,59 @@ void DataBases::on_DB_update_clicked()
 void DataBases::on_DB_add_clicked()
 {
     //添加
-    SqlOperationDialogBox("添加",ui->DB_comboBox_tableName->currentText());
-
+    QString tableName=ui->DB_comboBox_tableName->currentText();
+    if(!SqlOperationDialogBox("添加",tableName))
+        return;
+    QString sqlStr="insert into "+tableName;
+    QString addStr="(",condStr=" (";
+    for(int i=0;i<sqlVector.size();++i)
+    {
+        if(!sqlVector[i][1].isEmpty())
+        {
+            addStr=addStr+"'"+sqlVector[i][1]+"'"+",";
+            condStr=condStr+sqlVector[i][0]+",";
+        }
+    }
+    addStr[addStr.length()-1]=')';
+    condStr[condStr.length()-1]=')';
+    sqlStr=sqlStr+condStr+" values ";
+    sqlStr=sqlStr+addStr+";";
+    if(query->exec(sqlStr))
+    {
+        ui->DB_show->textCursor().insertText("成功插入一条记录");
+    }
+    else
+    {
+        ui->DB_show->textCursor().insertText(query->lastError().text());
+    }
+    sqlVector.clear();
 }
 
 void DataBases::on_DB_detele_clicked()
 {
     //删除
-    SqlOperationDialogBox("删除",ui->DB_comboBox_tableName->currentText());
+    QString tableName=ui->DB_comboBox_tableName->currentText();
+    if(!SqlOperationDialogBox("删除",tableName))
+        return;
+    QString sqlStr="delete from "+tableName;
+    QString condStr=" where ";
+    for(int i=0;i<sqlVector.size();++i)
+    {
+        if(!sqlVector[i][1].isEmpty())
+        {
+            condStr=condStr+sqlVector[i][0]+" like '"+sqlVector[i][1]+"' and ";
+        }
+    }
+    condStr.remove(condStr.length()-5,5);
+    sqlStr=sqlStr+condStr+";";
+    if(query->exec(sqlStr))
+    {
+        ui->DB_show->textCursor().insertText("成功删除一条记录");
+    }
+    else
+    {
+        ui->DB_show->textCursor().insertText(query->lastError().text());
+    }
 }
 
 void DataBases::createConfigFile()
@@ -142,7 +188,7 @@ void DataBases::selectTable()
     }
 }
 
-void DataBases::SqlOperationDialogBox(QString opName,QString tableName)
+bool DataBases::SqlOperationDialogBox(QString opName,QString tableName)
 {
     QMessageBox *dialogBox=new QMessageBox(this);
     //设置自定义对话框的主题名
@@ -177,6 +223,7 @@ void DataBases::SqlOperationDialogBox(QString opName,QString tableName)
     QPushButton *quitButton=dialogBox->addButton(QMessageBox::Cancel);
     quitButton->adjustSize();
     dialogBox->exec();
+    sqlVector.resize(0);
     if(dialogBox->clickedButton()==commitButton)
     {
         //将框中的数据转为sql语句请执行
@@ -192,4 +239,7 @@ void DataBases::SqlOperationDialogBox(QString opName,QString tableName)
     delete commitButton;
     delete quitButton;
     delete dialogBox;
+    //将文本框中的内容清空
+    ui->DB_show->clear();
+    return ((sqlVector.size()==0)?false:true);
 }
