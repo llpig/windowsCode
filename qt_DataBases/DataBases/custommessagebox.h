@@ -8,17 +8,23 @@
 #include <algorithm>
 #include <QVector>
 #include <QLineEdit>
+
 using namespace std;
 
 class CustomMessageBox : public QMessageBox
 {
     Q_OBJECT
 public:
-    explicit CustomMessageBox(QWidget *parent = 0);
+    explicit CustomMessageBox(QWidget *parent = 0,QString="MessageBox");
     ~CustomMessageBox();
     //对话框可以根据其内容自动计算大小
     void adjustWindowSize(QSize windowSize);
-    QSize addWidgetToMessageBox(QStringList stringList,QWidget *parent);
+    QSize addWidgetToMessageBox(QStringList stringList);
+    QSize addWidgetToMessageBoxUpdate(QStringList stringList);
+    int addPushButtonToMessageBox();
+    QPushButton *m_CommitPushButton;
+    QPushButton *m_CancelPushButtom;
+    static QVector<QLineEdit*> m_LineEditVector;//用于保存创建的条形框
 protected:
     int m_MessageBoxWidth;
     int m_MessageBoxHeight;
@@ -26,7 +32,7 @@ protected:
     static int m_RightInterval;//窗口右间隔
     static int m_IntervalLR;//组件左右间隔
     static int m_IntervalUL;//组件上下间隔
-    QVector<QLineEdit&> m_pushButtonVector;//用于保存创建的条形框
+    static int m_LineEditWidth;//条形框的宽
     void resizeEvent(QResizeEvent* event);
 };
 

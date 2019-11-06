@@ -66,7 +66,7 @@ public:
         DB_detele->setGeometry(QRect(300, 210, 75, 23));
         DB_show = new QTextEdit(centralWidget);
         DB_show->setObjectName(QStringLiteral("DB_show"));
-        DB_show->setGeometry(QRect(20, 60, 251, 161));
+        DB_show->setGeometry(QRect(20, 60, 261, 161));
         DB_comboBox_tableName = new QComboBox(centralWidget);
         DB_comboBox_tableName->setObjectName(QStringLiteral("DB_comboBox_tableName"));
         DB_comboBox_tableName->setGeometry(QRect(300, 10, 69, 22));

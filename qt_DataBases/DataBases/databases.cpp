@@ -32,125 +32,175 @@ void DataBases::initWindow()
     selectTable();
 }
 
+//查询按钮
 void DataBases::on_DB_select_clicked()
 {
-    //查询
     QString tableName=ui->DB_comboBox_tableName->currentText();
-    if(!SqlOperationDialogBox("查询",tableName))
-        return;
-
-    //将对话框中内容拼接为sql语句
-    QString sqlStr="select ",selectStr="",condStr="";
-
-    for(int i=0;i<sqlVector.size();++i)
+    if(!createDialogBox("信息查询",tableName,Select))
     {
-        if(sqlVector[i][1].isEmpty())
+        return;
+    }
+    QString queries="",queryCond="",queryStr="";
+    for(int i=0;i<m_MessageBoxInfo.size();i+=2)
+    {
+        if(m_MessageBoxInfo[i+1].isEmpty())
         {
-            selectStr+=sqlVector[i][0];
-            selectStr+=",";
+            queries=queries+m_MessageBoxInfo[i]+",";
         }
         else
         {
-            condStr+=sqlVector[i][0];
-            condStr+=" like ";
-            condStr=condStr+"'%"+sqlVector[i][1]+"%'";
-            condStr+=" and ";
+            queryCond=queryCond+m_MessageBoxInfo[i]+" like '%"+m_MessageBoxInfo[i+1]+"%' and ";
         }
     }
-    //保存需要查询内容
-    selectStr[selectStr.length()-1]=' ';
-    sqlStr+=selectStr;
-    sqlStr+="from ";
-    sqlStr+=ui->DB_comboBox_tableName->currentText();
-    //保存查询条件
-    condStr.remove(condStr.length()-4,4);
-    condStr=" where "+condStr;
-    sqlStr+=condStr;
-    QStringList strList=selectStr.split(',');
-    //计算本次共查询了几个内容
-    int selectNum=strList.length();
-    for(int i=0;i<selectNum;++i)
+    if(queries.isEmpty())
     {
-        ui->DB_show->textCursor().insertText(strList[i]+" ");
-    }
-    ui->DB_show->textCursor().insertText("\n");
-    query->exec(sqlStr);
-    while(query->next())
-    {
-        for(int i=0;i<selectNum;++i)
-        {
-            ui->DB_show->textCursor().insertText(query->value(i).toString()+" ");
-        }
-        ui->DB_show->textCursor().insertText("\n");
-    }
-    sqlVector.clear();
 
+        qDebug()<<"未检测到需要查询的内容"<<endl;
+        return;
+    }
+    else if(queryCond.isEmpty())
+    {
+        queries.remove(queries.length()-1,1);
+        queryStr=QString("Select %1 from %2;").arg(queries).arg(tableName);
+    }
+    else
+    {
+        queries.remove(queries.length()-1,1);
+        queryCond.remove(queryCond.length()-5,5);
+        queryStr=QString("Select %1 from %2 where %3;").arg(queries).arg(tableName).arg(queryCond);
+    }
+    addTextToShowBox("查询内容:("+queries+")\n查询结果：");
+    int nums=queries.split(',').length();
+    if(!queryStr.isEmpty())
+    {
+        if(query->exec(queryStr))
+        {
+            while(query->next())
+            {
+                for(int i=0;i<nums;++i)
+                {
+                     addTextToShowBox(query->value(i).toString()+",");
+                }
+                addTextToShowBox("\n");
+            }
+        }
+        else
+        {
+            addTextToShowBox(query->lastError().text()+"\n");
+        }
+    }
 }
 
+//更新按钮
 void DataBases::on_DB_update_clicked()
 {
     //更新（更新存在旧值和新值的替换关系，所以需要一个新的自定义控件）
-//    QString tableName=ui->DB_comboBox_tableName->currentText();
-//    updateOperationDialogBox(tableName);
+    QString tableName=ui->DB_comboBox_tableName->currentText();
+    if(!createDialogBox("信息更新",tableName,Update))
+    {
+        return;
+    }
+    QString queries="",queryCond="",queryStr="";
+    for(int i=0;i<m_MessageBoxInfo.size();i+=3)
+    {
+        //需要修改的内容
+        if(!m_MessageBoxInfo[i+1].isEmpty())
+        {
+            queryCond=queryCond+m_MessageBoxInfo[i]+" like '%"+m_MessageBoxInfo[i+1]+"%' and ";
+        }
+        //条件
+        if(!m_MessageBoxInfo[i+2].isEmpty())
+        {
+            queries=queries+m_MessageBoxInfo[i]+" = '"+m_MessageBoxInfo[i+2]+"',";
+        }
+    }
+    if(queries.isEmpty()||queryCond.isEmpty())
+    {
+        qDebug()<<"请输入修改后的内容和修改的条件！"<<endl;
+    }
+    queries.remove(queries.length()-1,1);
+    queryCond.remove(queryCond .length()-5,5);
+    queryStr=QString("UpDate %1 Set %2 Where %3;").arg(tableName).arg(queries).arg(queryCond);
+    if(query->exec(queryStr))
+    {
+        addTextToShowBox("符合条件的记录已更改完成！\n");
+    }
+    else
+    {
+        addTextToShowBox(query->lastError().text()+"\n");
+    }
 }
 
+//添加按钮
 void DataBases::on_DB_add_clicked()
 {
-    //添加
+
     QString tableName=ui->DB_comboBox_tableName->currentText();
-    if(!SqlOperationDialogBox("添加",tableName))
-        return;
-    QString sqlStr="insert into "+tableName;
-    QString addStr="(",condStr=" (";
-    for(int i=0;i<sqlVector.size();++i)
+    if(!createDialogBox("信息添加",tableName,Add))
     {
-        if(!sqlVector[i][1].isEmpty())
+        return;
+    }
+    QString queries="",queryCond="",queryStr="";
+    for(int i=0;i<m_MessageBoxInfo.size();i+=2)
+    {
+        if(!m_MessageBoxInfo[i+1].isEmpty())
         {
-            addStr=addStr+"'"+sqlVector[i][1]+"'"+",";
-            condStr=condStr+sqlVector[i][0]+",";
+            queries=queries+m_MessageBoxInfo[i]+",";
+            queryCond=queryCond+"'"+m_MessageBoxInfo[i+1]+"',";
         }
     }
-    addStr[addStr.length()-1]=')';
-    condStr[condStr.length()-1]=')';
-    sqlStr=sqlStr+condStr+" values ";
-    sqlStr=sqlStr+addStr+";";
-    if(query->exec(sqlStr))
+    if(queries.isEmpty())
     {
-        ui->DB_show->textCursor().insertText("成功插入一条记录");
+        qDebug()<<"请输入需要插入的内容"<<endl;
+        return;
+    }
+    queries.remove(queries.length()-1,1);
+    queryCond.remove(queryCond.length()-1,1);
+    queryStr=QString("Insert into %1 (%2) values (%3);").arg(tableName).arg(queries).arg(queryCond);
+    if(query->exec(queryStr))
+    {
+        addTextToShowBox("记录已成功添加！");
     }
     else
     {
-        ui->DB_show->textCursor().insertText(query->lastError().text());
+        addTextToShowBox(query->lastError().text()+"\n");
     }
-    sqlVector.clear();
 }
 
+//删除按钮
 void DataBases::on_DB_detele_clicked()
 {
-    //删除
     QString tableName=ui->DB_comboBox_tableName->currentText();
-    if(!SqlOperationDialogBox("删除",tableName))
-        return;
-    QString sqlStr="delete from "+tableName;
-    QString condStr=" where ";
-    for(int i=0;i<sqlVector.size();++i)
+    if(!createDialogBox("信息删除",tableName,Delete))
     {
-        if(!sqlVector[i][1].isEmpty())
+        return;
+    }
+    QString queryCond="",queryStr="";
+    for(int i=0;i<m_MessageBoxInfo.size();i+=2)
+    {
+        if(!m_MessageBoxInfo[i+1].isEmpty())
         {
-            condStr=condStr+sqlVector[i][0]+" like '"+sqlVector[i][1]+"' and ";
+            queryCond=queryCond+m_MessageBoxInfo[i]+" like '%"+m_MessageBoxInfo[i+1]+"%' and ";
         }
     }
-    condStr.remove(condStr.length()-5,5);
-    sqlStr=sqlStr+condStr+";";
-    if(query->exec(sqlStr))
+    if(queryCond.isEmpty())
     {
-        ui->DB_show->textCursor().insertText("成功删除一条记录");
+        qDebug()<<"请填写需要删除内容的条件"<<endl;
+        return;
+    }
+    queryCond.remove(queryCond.length()-5,5);
+    queryStr=QString("Delete from %1 where %2;").arg(tableName).arg(queryCond);
+    qDebug()<<queryStr<<endl;
+    if(query->exec(queryStr))
+    {
+        addTextToShowBox("符合条件的内容已经被删除！\n");
     }
     else
     {
-        ui->DB_show->textCursor().insertText(query->lastError().text());
+        addTextToShowBox(query->lastError().text());
     }
 }
+
 
 void DataBases::createConfigFile()
 {
@@ -178,6 +228,7 @@ void DataBases::createConfigFile()
     }
 }
 
+
 void DataBases::selectTable()
 {
     QString sqlStr="show tables";
@@ -189,117 +240,33 @@ void DataBases::selectTable()
     }
 }
 
-bool DataBases::SqlOperationDialogBox(QString opName,QString tableName)
-{
-    int messageBoxWidth,messageBoxHeight;
-    int maxLabelWidth=0,labelHeight=0;
-    CustomMessageBox *dialogBox=new CustomMessageBox();
-    //设置自定义对话框的主题名
-    dialogBox->setWindowTitle(opName);
-    //创建一个条形框的数组，用例保存创建出的条形框
-    QVector<QLineEdit*> lineEditVector;
-    QStringList sqlResult=getTabelDescribe(tableName);
 
-     //将组件绑定在父控件上，当父空间被销毁时，子控件会自动被销毁
-        QLabel *label=new QLabel(dialogBox);
-        QLineEdit *lineEdit=new QLineEdit(dialogBox);
-        label->setText(query->value(0).toString());
-        //标签会根据文本自动调节大小
-        maxLabelWidth=max(maxLabelWidth,label->width());
-        labelHeight=label->height();
-        label->setGeometry(0,lineEditVector.size()*(label->height()+5),label->width(),label->height());
-        //将条形框添加入数组
-        lineEdit->setObjectName(label->text());
-        lineEditVector.push_back(lineEdit);
-    for(int i=0;i<lineEditVector.size();++i)
+bool DataBases::createDialogBox(QString opName, QString tableName, OpType opType)
+{
+    CustomMessageBox *dialogBox=new CustomMessageBox(this,opName);
+    QSize boxSize;
+    if(opType==Update)
     {
-        lineEditVector[i]->setGeometry(maxLabelWidth+20,i*(labelHeight+5),100,labelHeight);
+        boxSize=dialogBox->addWidgetToMessageBoxUpdate(getTabelDescribe(tableName));
     }
-    QPushButton *commitButton=dialogBox->addButton(tr("commit"),QMessageBox::ActionRole);
-    commitButton->adjustSize();
-    QPushButton *quitButton=dialogBox->addButton(QMessageBox::Cancel);
-    quitButton->adjustSize();
-    messageBoxWidth=maxLabelWidth+150;
-    messageBoxHeight=lineEditVector.size()*(labelHeight+5)+50;
-    dialogBox->adjustWindowSize(messageBoxWidth,messageBoxHeight);
+    else
+    {
+        boxSize=dialogBox->addWidgetToMessageBox(getTabelDescribe(tableName));
+    }
+    int boxHeight=dialogBox->addPushButtonToMessageBox();
+    boxSize.setHeight(boxSize.height()+1.5*boxHeight);
+    dialogBox->adjustWindowSize(boxSize);
     dialogBox->exec();
-    sqlVector.resize(0);
-    if(dialogBox->clickedButton()==commitButton)
+    if(opType==Update)
     {
-        //将框中的数据转为sql语句请执行
-        sqlVector.resize(lineEditVector.size());
-        for(int i=0;i<lineEditVector.size();++i)
-        {
-            sqlVector[i].resize(2);
-            sqlVector[i][0]=lineEditVector[i]->objectName();
-            sqlVector[i][1]=lineEditVector[i]->text();
-        }
+        return isCommitClickedUpdate(dialogBox);
     }
-
-    delete commitButton;
-    delete quitButton;
-    delete dialogBox;
-    //将文本框中的内容清空
-    ui->DB_show->clear();
-    return ((sqlVector.size()==0)?false:true);
+    else
+    {
+        return isCommitClicked(dialogBox);
+    }
 }
 
-bool DataBases::updateOperationDialogBox(QString tableName)
-{
-    QMessageBox *upDateDialog=new QMessageBox(this);
-    upDateDialog->setWindowTitle("更新");
-    upDateDialog->adjustSize();
-    QLabel *newLabel=new QLabel(upDateDialog);
-    QLabel *oldLabel=new QLabel(upDateDialog);
-    newLabel->setText("new");
-    newLabel->adjustSize();
-    oldLabel->setText("old");
-    oldLabel->adjustSize();
-    QVector<QLineEdit*> oldLineEditVector;
-    QVector<QLineEdit*> newLineEditVector;
-    QString sqlStr="DESCRIBE "+tableName;
-    query->exec(sqlStr);
-    int maxLabelWidth=0,labelHeight=0;
-    while(query->next())
-    {
-        QLabel *label=new QLabel(upDateDialog);
-        QLineEdit *oldLineEdit=new QLineEdit(upDateDialog);
-        QLineEdit *newLineEdit=new QLineEdit(upDateDialog);
-        label->setText(query->value(0).toString());
-
-        oldLineEdit->setObjectName("old_"+label->text());
-        oldLineEditVector.push_back(oldLineEdit);
-        newLineEdit->setObjectName("new_"+label->text());
-        newLineEditVector.push_back(newLineEdit);
-        label->adjustSize();
-        maxLabelWidth=max(maxLabelWidth,label->width());
-        labelHeight=label->height();
-        label->setGeometry(0,oldLineEditVector.size()*(label->height()+5),label->width(),label->height());
-
-    }
-    for(int i=0;i<newLineEditVector.size();++i)
-    {
-        oldLineEditVector[i]->setGeometry(maxLabelWidth+5,(i+1)*(labelHeight+5),50,labelHeight);
-        newLineEditVector[i]->setGeometry(maxLabelWidth+60,(i+1)*(labelHeight+5),50,labelHeight);
-    }
-
-    oldLabel->setGeometry(maxLabelWidth+5,0,oldLabel->width(),oldLabel->height());
-    newLabel->setGeometry(maxLabelWidth+60,0,newLabel->width(),newLabel->height());
-
-    QPushButton *commitButton=upDateDialog->addButton(tr("commit"),QMessageBox::ActionRole);
-    commitButton->adjustSize();
-    QPushButton *quitButton=upDateDialog->addButton(QMessageBox::Cancel);
-    quitButton->adjustSize();
-
-    qDebug()<<upDateDialog->sizeHint().width()<<":"<<upDateDialog->sizeHint().height()<<endl;
-    //对话框的长宽不能正常显示
-
-    upDateDialog->exec();
-
-
-    delete upDateDialog;
-    return true;
-}
 
 QStringList DataBases::getTabelDescribe(QString tableName)
 {
@@ -311,5 +278,46 @@ QStringList DataBases::getTabelDescribe(QString tableName)
         sqlResult.push_back(query->value(0).toString());
     }
     return sqlResult;
+}
+
+bool DataBases::isCommitClicked(CustomMessageBox *messageBox)
+{
+    bool bRet=false;
+    m_MessageBoxInfo.clear();
+    if(messageBox->clickedButton()==messageBox->m_CommitPushButton)
+    {
+        bRet=true;
+        for(int i=0;i<messageBox->m_LineEditVector.size();++i)
+        {
+            m_MessageBoxInfo.push_back(messageBox->m_LineEditVector[i]->objectName());
+            m_MessageBoxInfo.push_back(messageBox->m_LineEditVector[i]->text());
+        }
+    }
+    return bRet;
+}
+
+bool DataBases::isCommitClickedUpdate(CustomMessageBox *messageBox)
+{
+    bool bRet=false;
+    m_MessageBoxInfo.clear();
+    if(messageBox->clickedButton()==messageBox->m_CommitPushButton)
+    {
+        bRet=true;
+        for(int i=0;i<messageBox->m_LineEditVector.size();i+=2)
+        {
+            m_MessageBoxInfo.push_back(messageBox->m_LineEditVector[i]->objectName());
+            m_MessageBoxInfo.push_back(messageBox->m_LineEditVector[i]->text());
+            m_MessageBoxInfo.push_back(messageBox->m_LineEditVector[i+1]->text());
+        }
+    }
+    return bRet;
+}
+
+
+void DataBases::addTextToShowBox(QString text)
+{
+    //将文本框中的内容清空
+    ui->DB_show->clear();
+    ui->DB_show->textCursor().insertText(text);
 }
 

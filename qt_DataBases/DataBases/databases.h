@@ -19,10 +19,12 @@
 
 using namespace std;
 
+
+
 namespace Ui {
 class DataBases;
 }
-
+enum OpType{Select,Update,Add,Delete};
 class DataBases : public QMainWindow
 {
     Q_OBJECT
@@ -48,20 +50,21 @@ private:
     Ui::DataBases *ui;
     QSqlDatabase *DB_Mysql;//数据库指针
     QSqlQuery *query;//数据库执行指针
-    QVector<QVector<QString> > sqlVector;//用于保存（插入、删除、更改）的对话框信息
-    QVector<QVector<QVector<QString> > > updateSqlVector;//用户保存更新的对话框信息
+    QStringList m_MessageBoxInfo;//用于保存的对话框信息
     static QString configFileName;//配置文件名称
-
     //创建配置文件
     void createConfigFile();
     //查询当前数据中的表，并将表名写入下拉框
     void selectTable();
     //创建数据库操作的对话框(查询，删除，插入)
-    bool SqlOperationDialogBox(QString opName, QString tableName);
-    //创建数据库更新操作的对话框
-    bool updateOperationDialogBox(QString tableName);
+    bool createDialogBox(QString opName, QString tableName, OpType opType);
     //获取表的描述
     QStringList getTabelDescribe(QString tableName);
+    //判断是否点击的为"commit"按钮
+    bool isCommitClicked(CustomMessageBox* messageBox);
+    bool isCommitClickedUpdate(CustomMessageBox* messageBox);
+    //将text的内容写入展示框（文本框）中
+    void addTextToShowBox(QString text);
 };
 
 #endif // DATABASES_H
