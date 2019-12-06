@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ViewText</string>
+    <string name="textPHP">PHP是世界上最好的语言</string>
+    <string name="textCPP">CPP是世界上最好的语言</string>
+    <string name="textC">C语言是世界上最好的语言</string>
+    <string name="textJAVA">JAVA是世界上最好的语言</string>
+    <string name="textPoetry">待到秋来九月八，我花开后百花杀。冲天香阵透长安，满城尽带黄金甲。</string>
+</resources>

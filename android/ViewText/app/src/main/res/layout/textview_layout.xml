@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="15dp">
+    <!--将文字设置为红色、24sp、左对齐-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="@string/textPHP"
+        android:textColor="#ff0000"
+        android:textSize="24sp" />
+    <!--如果字太多放不下剩余的字显示为省略号-->
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/textCPP"
+        android:textColor="#03A9F4"
+        android:textSize="24sp" />
+    <!--给文字添加下划线-->
+    <TextView
+        android:id="@+id/textViewJAVA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="15dp"
+        android:text="@string/textJAVA"
+        android:textColor="#ff00ff"
+        android:textSize="24sp" />
+    <!--给文字添加中划线-->
+    <TextView
+        android:id="@+id/textViewC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/textC"
+        android:textColor="#FF5722"
+        android:textSize="24sp" />
+    <!--显示不下的文字以滚动的形式在屏幕上显示-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="15dp"
+        android:text="@string/textPoetry"
+        android:textColor="#43F436"
+        android:textSize="24sp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+    <!--给TextView加图标-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/setting"
+        android:drawablePadding="5dp"
+        android:text="设置"
+        android:textColor="#0000ff"
+        android:textSize="24sp" />
+</LinearLayout>

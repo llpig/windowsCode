@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--以第9张组件为中心进行相对布局-->
+    <TextView
+        android:id="@+id/view9"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/p9">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/view2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toLeftOf="@id/view9"
+        android:layout_centerVertical="true"
+        android:background="@drawable/p2">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/view6"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@id/view9"
+        android:layout_centerVertical="true"
+        android:background="@drawable/p6">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/view4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/view9"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/p4">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/view8"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/view9"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/p8">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/view1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/view2"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/p1">
+    </TextView>
+
+    <TextView
+        android:id="@+id/view3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/view2"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/p3">
+    </TextView>
+
+    <TextView
+        android:id="@+id/view5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/view6"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/p5">
+    </TextView>
+
+    <TextView
+        android:id="@+id/view7"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/view6"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/p7">
+    </TextView>
+
+
+</RelativeLayout>
