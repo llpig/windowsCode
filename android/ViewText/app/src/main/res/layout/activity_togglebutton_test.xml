@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/imageLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/on_light"
+        android:layout_marginBottom="20dp"/>
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textOn="开灯"
+        android:textOff="关灯"
+        android:textSize="24sp"
+        android:background="@color/colorIndigo"/>
+
+    <Switch
+        android:id="@+id/switchDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="黑夜模式"
+        android:textColor="@color/colorOrange"
+        android:layout_gravity="left"
+        android:textSize="24sp"/>
+
+</LinearLayout>

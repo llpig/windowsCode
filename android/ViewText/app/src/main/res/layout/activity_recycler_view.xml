@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+    <Button
+        android:id="@+id/btn_ListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListView"
+        android:textSize="24sp"
+        android:textColor="@color/colorYellow"
+        android:background="@color/colorRed"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_GridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GridView"
+        android:textAllCaps="false"
+        android:background="@color/coloGreen"
+        android:textSize="24sp"
+        android:textColor="@color/colorRed"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

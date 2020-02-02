@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/dialogGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" >
+
+        <RadioButton
+            android:id="@+id/radioAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alert Dialog"
+            android:checked="true"
+            android:textSize="30sp"/>
+
+        <RadioButton
+            android:id="@+id/radioDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date Dialog"
+            android:textSize="30sp"/>
+
+        <RadioButton
+            android:id="@+id/radioTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Dialog"
+            android:textSize="30sp"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonCreateDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="创建Dialog"
+        android:textSize="30sp"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/textViewShow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        />
+
+</LinearLayout>

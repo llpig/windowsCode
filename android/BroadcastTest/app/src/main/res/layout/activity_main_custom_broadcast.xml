@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/SendButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_margin="7dp"
+        android:text="发送自定义广播"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorRed"/>
+
+
+    <Button
+        android:id="@+id/SendButtonPermission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_margin="7dp"
+        android:text="发送有权限的自定义广播"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorRed"/>
+
+</LinearLayout>

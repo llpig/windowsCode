@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><!--App首页-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--头部-->
+    <LinearLayout
+        android:id="@+id/Top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/ButtonUserAvatar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/user_avatar" />
+
+            <TextView
+                android:id="@+id/TextTitle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@color/colorRed"
+                android:gravity="center"
+                android:text="FunRun"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--中部:使用Fragment替换-->
+    <LinearLayout
+        android:id="@+id/Middle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:background="@color/colorAccent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="畅跑首页"
+            android:textSize="50sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+    <!--尾部-->
+    <LinearLayout
+        android:id="@+id/Bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="4"
+            android:rowCount="1"
+            android:useDefaultMargins="false"
+            android:layout_gravity="center">
+            <!--该子组件在网格布局中占据第0行，第0列，大小占一个网格-->
+            <Button
+                android:id="@+id/ButtonSportsShow"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/sports_show"/>
+
+            <Button
+                android:id="@+id/ButtonRunning"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/running" />
+
+            <Button
+                android:id="@+id/ButtonSportsCircle"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/sports_circle" />
+
+            <Button
+                android:id="@+id/ButtonPersonalCenter"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:background="@drawable/personal_center" />
+
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

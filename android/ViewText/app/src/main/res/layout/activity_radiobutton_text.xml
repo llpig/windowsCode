@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+    <!--单选框必须放在单选组框中-->
+    <RadioGroup
+        android:id="@+id/sexRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="性别:"
+            android:textColor="@color/colorBlue"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/manRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="男"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/womenRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女"
+            android:textSize="24sp" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="25dp"
+        android:text="你喜欢吃的食物:"
+        android:textColor="@color/colorOrange"
+        android:textSize="22sp" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp">
+
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="西红柿"
+                android:textSize="24sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="辣椒"
+                android:textSize="24sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="白菜"
+                android:textSize="24sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="土豆"
+                android:textSize="24sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="鸡蛋"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>
