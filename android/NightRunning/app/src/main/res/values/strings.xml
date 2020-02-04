@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NightRunning</string>
+    <string name="sports_circle">运动圈</string>
+    <string name="sports_show">运动展示</string>
+    <string name="running">跑步</string>
+    <string name="historical_data">历史数据</string>
+    <string name="user_route">我的路线</string>
+    <string name="training_plan">训练计划</string>
 </resources>
