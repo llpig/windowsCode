@@ -10,48 +10,70 @@
 9        android:targetSdkVersion="29" />
 9-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
 10
-11    <application
-11-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-22:19
-12        android:allowBackup="true"
-12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:6:9-35
-13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-13-->[androidx.core:core:1.1.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\77be7d3270c29f3380dfe0027fd17a86\core-1.1.0\AndroidManifest.xml:24:18-86
-14        android:debuggable="true"
-15        android:extractNativeLibs="false"
-16        android:icon="@mipmap/ic_launcher"
-16-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:7:9-43
-17        android:label="@string/app_name"
-17-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:8:9-41
-18        android:roundIcon="@mipmap/ic_launcher_round"
-18-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:9:9-54
-19        android:supportsRtl="true"
-19-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:10:9-35
-20        android:testOnly="true"
-21        android:theme="@style/AppTheme" >
-21-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:11:9-40
-22        <activity android:name="com.kong.nightrunning.PersonalCenterActivity" />
-22-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:9-69
-22-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:19-57
-23        <activity android:name="com.kong.nightrunning.UserRegisteredActivity" />
-23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:9-60
-23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:19-57
-24        <activity android:name="com.kong.nightrunning.UserLoginActivity" />
-24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:9-55
-24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:19-52
-25        <activity android:name="com.kong.nightrunning.MainActivity" >
-25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:15:9-21:20
-25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:15:19-47
-26            <intent-filter>
-26-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:16:13-20:29
-27                <action android:name="android.intent.action.MAIN" />
-27-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:17:17-69
-27-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:17:25-66
-28
-29                <category android:name="android.intent.category.LAUNCHER" />
-29-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:19:17-77
-29-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:19:27-74
-30            </intent-filter>
-31        </activity>
-32    </application>
-33
-34</manifest>
+11    <!-- 活动 -->
+12    <application
+12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-32:19
+13        android:allowBackup="true"
+13-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:6:9-35
+14        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+14-->[androidx.core:core:1.1.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\77be7d3270c29f3380dfe0027fd17a86\core-1.1.0\AndroidManifest.xml:24:18-86
+15        android:debuggable="true"
+16        android:extractNativeLibs="false"
+17        android:icon="@mipmap/ic_launcher"
+17-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:7:9-43
+18        android:label="@string/app_name"
+18-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:8:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:9:9-54
+20        android:supportsRtl="true"
+20-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:10:9-35
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme" >
+22-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:11:9-40
+23        <activity android:name="com.kong.nightrunning.PersonalCenterActivity" />
+23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:9-59
+23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:19-57
+24        <activity android:name="com.kong.nightrunning.UserRegisteredActivity" />
+24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:9-60
+24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:19-57
+25        <activity android:name="com.kong.nightrunning.UserLoginActivity" />
+25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:9-55
+25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:19-52
+26        <activity android:name="com.kong.nightrunning.MainActivity" >
+26-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:15:9-21:20
+26-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:15:19-47
+27            <intent-filter>
+27-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:16:13-20:29
+28                <action android:name="android.intent.action.MAIN" />
+28-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:17:17-69
+28-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:17:25-66
+29
+30                <category android:name="android.intent.category.LAUNCHER" />
+30-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:19:17-77
+30-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:19:27-74
+31            </intent-filter>
+32        </activity>
+33        <!-- 服务 -->
+34        <service android:name="com.kong.nightrunning.RecordStepNumberService" />
+34-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:23:9-59
+34-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:23:18-57
+35        <!-- 广播,服务可能被杀死，所以在清单文件中注册 -->
+36        <receiver android:name="com.kong.nightrunning.NightRunningBroadcastReceiver" >
+36-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:9-31:20
+36-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:19-64
+37            <intent-filter>
+37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:26:13-30:29
+38                <action android:name="android.intent.action.DATE_CHANGED" />
+38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:17-76
+38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:25-74
+39                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:17-79
+39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:25-77
+40                <action android:name="android.intent.action.ACTION_USER_PRESENT" />
+40-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:29:17-83
+40-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:29:25-81
+41            </intent-filter>
+42        </receiver>
+43    </application>
+44
+45</manifest>

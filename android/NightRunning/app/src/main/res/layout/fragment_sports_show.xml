@@ -12,18 +12,20 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/TextViewTodayNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:maxLines="1"
-            android:text="12345"
+            android:text="0"
             android:textSize="90dp" />
 
         <TextView
+            android:id="@+id/TextViewTargetNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="目标步数:10000"
+            android:text="目标步数:0"
             android:textSize="24sp" />
 
 
@@ -58,6 +60,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/LayoutNormalModeDetailedData"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -65,6 +68,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/LayoutRunningModeDetailedData"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -81,15 +85,18 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="今天消耗的热量相当于100片薯片。"
+            android:maxLines="1"
             android:textSize="25sp" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="10dp"
+            android:maxLines="1"
             android:text="今日计划完成度:"
             android:textSize="25sp" />
     </LinearLayout>

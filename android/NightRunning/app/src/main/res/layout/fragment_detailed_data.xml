@@ -6,31 +6,54 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/TextViewDetailedDataTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text=""
-        android:textSize="30sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="25sp" />
 
     <TextView
+        android:id="@+id/TextViewDetailedDataStopNumber"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="步数"
-        android:textSize="30sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="步数(步)"
+        android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/TextViewDetailedDataCalories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="卡路里"
-        android:textSize="30sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="卡路里(千卡)"
+        android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/TextViewDetailedDataMileage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="里程"
-        android:textSize="30sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="里程(千米)"
+        android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/TextViewDetailedDataTime"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="时间(分钟)"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/TextViewDetailedDataSpeed"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="速度(千米/分钟)"
+        android:textSize="20sp" />
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kong.nightrunning">
-
+    <!--活动-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonalCenterActivity"></activity>
+        <activity android:name=".PersonalCenterActivity"/>
         <activity android:name=".UserRegisteredActivity" />
         <activity android:name=".UserLoginActivity" />
         <activity android:name=".MainActivity">
@@ -19,6 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--服务-->
+        <service android:name=".RecordStepNumberService"/>
+        <!--广播,服务可能被杀死，所以在清单文件中注册-->
+        <receiver android:name=".NightRunningBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
