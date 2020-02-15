@@ -51,6 +51,7 @@ public class NightRunDatabase extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             startStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName2));
             totalStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName3));
+
         }
         return new int[]{startStepNumber, totalStepNumber};
     }

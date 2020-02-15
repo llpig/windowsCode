@@ -14,7 +14,7 @@ public class Tool {
     Intent intent=new Intent();
     Toast toast;
     public static enum MessageTypeEnum{
-        ADDSTEPNUMBER(1);
+        ADDSTEPNUMBER(1),FOREGROUNDSERVICE(2);
         private int index;
         MessageTypeEnum(int index) {
             this.index=index;

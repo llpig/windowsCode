@@ -5,16 +5,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,50 +27,22 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private Tool tool;
-    private MessageHandler handler;
     private TextView mTextViewTitle;
     private Button mButtonUserAvatar, mButtonSportsShow, mButtonRunning, mButtonSportsCircle;
     public Fragment mLastFragment, mSportsShowFragment, mRunningFragment, mSportsCircleFragment;
-
-    public ServiceConnection serviceConnection = new ServiceConnection() {
-        //延迟时间0S,周期30S
-        int delayTime=0,period=30000;
-        int addStepNumber=1;
-        //服务连接
-        @Override
-        public void onServiceConnected(ComponentName name, final IBinder service) {
-            handler = new MessageHandler();
-            //开启定时任务
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Message message = new Message();
-                    message.what = Tool.MessageTypeEnum.ADDSTEPNUMBER.getIndex();
-                    message.arg1 = ((RecordStepNumberService.StepBinder) service).getStepNumber();
-                    handler.sendMessage(message);
-                }
-            }, delayTime, period);
-        }
-        //服务断开
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
-
     public static NightRunDatabase databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.initActivity();
         this.findViewAndSetOnClickListener();
+        databaseHelper=new NightRunDatabase(this,"NightRunning",null,1);
+        //注册广播
+        registerBroadcastReceiver();
         //启动服务
-        bindService(new Intent(MainActivity.this, RecordStepNumberService.class), serviceConnection, Service.BIND_AUTO_CREATE);
-        //创建数据库
-        databaseHelper = new NightRunDatabase(MainActivity.this, "NightRunning", null, 1);
-        databaseHelper.getReadableDatabase();
+        startService(new Intent(MainActivity.this, RecordStepNumberService.class));
     }
 
     //初始化Activity
@@ -73,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         //取消App的标题栏
         getSupportActionBar().hide();
         tool = new Tool();
-
         mTextViewTitle = findViewById(R.id.TextViewTitle);
         mSportsShowFragment = new SportsShowFragment();
         mRunningFragment = new RunningFragment();
@@ -183,24 +159,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //接收处理消息
-    public class MessageHandler extends Handler {
-        public void handleMessage(Message message) {
-            super.handleMessage(message);
-            switch (message.what) {
-                case 1: {
-                    ((SportsShowFragment) mSportsShowFragment).updateTodayStopNumber(message.arg1);
-                    break;
-                }
+    //注册广播（通过广播来更新数据）
+    private void registerBroadcastReceiver(){
+        IntentFilter filter1=new IntentFilter();
+        filter1.addAction(getPackageName()+".UPDATESTEPNUMBER_BROADCAST");
+        registerReceiver(new CustomBroadCastReceiver(),filter1);
+        IntentFilter filter2=new IntentFilter();
+        filter2.addAction(Intent.ACTION_TIME_TICK);
+        registerReceiver(new NightRunningBroadcastReceiver(),filter2);
+    }
+
+    private class CustomBroadCastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().toString().equals(getPackageName()+".UPDATESTEPNUMBER_BROADCAST")){
+                int todayStepNumber=intent.getExtras().getInt("currentStepNumber");
+                ((SportsShowFragment)mSportsShowFragment).updateTodayStopNumber(todayStepNumber);
             }
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //解绑服务并关闭数据库
-        unbindService(serviceConnection);
-        databaseHelper.close();
-    }
+
 }

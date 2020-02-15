@@ -12,7 +12,7 @@
 10
 11    <!-- 活动 -->
 12    <application
-12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-32:19
+12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-31:19
 13        android:allowBackup="true"
 13-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:6:9-35
 14        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -59,21 +59,18 @@
 34-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:23:18-57
 35        <!-- 广播,服务可能被杀死，所以在清单文件中注册 -->
 36        <receiver android:name="com.kong.nightrunning.NightRunningBroadcastReceiver" >
-36-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:9-31:20
+36-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:9-30:20
 36-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:19-64
 37            <intent-filter>
-37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:26:13-30:29
-38                <action android:name="android.intent.action.DATE_CHANGED" />
-38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:17-76
-38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:25-74
-39                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:17-79
-39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:25-77
-40                <action android:name="android.intent.action.ACTION_USER_PRESENT" />
-40-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:29:17-83
-40-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:29:25-81
-41            </intent-filter>
-42        </receiver>
-43    </application>
-44
-45</manifest>
+37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:26:13-29:29
+38                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:17-79
+38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:25-77
+39                <action android:name="android.intent.action.DATE_CHANGED" />
+39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:17-76
+39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:25-74
+40            </intent-filter>
+41        </receiver>
+42    </application>
+43
+44</manifest>
