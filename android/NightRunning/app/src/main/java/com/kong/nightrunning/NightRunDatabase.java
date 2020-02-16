@@ -1,5 +1,6 @@
 package com.kong.nightrunning;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,33 +26,35 @@ public class NightRunDatabase extends SQLiteOpenHelper {
         insertRecords(db, 0, 0);
     }
 
+    //构造ContentValues
+    private ContentValues getContentValues(int startStepNumber, int totalStepNumber) {
+        ContentValues values = new ContentValues();
+        values.put(fieldName2, startStepNumber);
+        values.put(fieldName3, totalStepNumber);
+        return values;
+    }
+
     //插入记录
-    public void insertRecords(SQLiteDatabase db, int startStepNumber, int totalStepNumber) {
-        String sql = "insert into " + tableName +
-                "(" + fieldName2 + "," + fieldName3 + ") values" +
-                "(" + String.valueOf(startStepNumber) + "," + String.valueOf(totalStepNumber) + ");";
-        Log.v("database", sql);
-        db.execSQL(sql);
+    public boolean insertRecords(SQLiteDatabase db, int startStepNumber, int totalStepNumber) {
+        //如果返回值为-1，则说明插入失败
+        ContentValues values = getContentValues(startStepNumber, totalStepNumber);
+        return ((db.insert(tableName, null, values) == -1) ? false : true);
     }
 
     //更新记录
-    public void updateRecords(SQLiteDatabase db, int startStepNumber, int totalStepNumber) {
-        String sql = "update " + tableName + " set " +
-                fieldName2 + "=" + String.valueOf(startStepNumber) + "," +
-                fieldName3 + "=" + String.valueOf(totalStepNumber) +
-                " where Date=(select date('now','localtime'));";
-        Log.v("database", sql);
-        db.execSQL(sql);
+    public boolean updateRecords(SQLiteDatabase db, int startStepNumber, int totalStepNumber) {
+        //如果返回值不等于，则说明出现问题
+        ContentValues values = getContentValues(startStepNumber, totalStepNumber);
+        return ((db.update(tableName, values, fieldName1 + "=(select date('now','localtime'))", null) != 1) ? false : true);
     }
 
     //查询记录
     public int[] selectRecords(SQLiteDatabase db) {
         Cursor cursor = db.query(tableName, new String[]{fieldName2, fieldName3}, fieldName1 + "=(select date('now','localtime'))", null, null, null, null);
-        int startStepNumber = 0, totalStepNumber = 0;
+        int startStepNumber = -1, totalStepNumber = -1;
         while (cursor.moveToNext()) {
             startStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName2));
             totalStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName3));
-
         }
         return new int[]{startStepNumber, totalStepNumber};
     }

@@ -36,7 +36,6 @@
         <receiver android:name="com.kong.nightrunning.NightRunningBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-                <action android:name="android.intent.action.DATE_CHANGED" />
             </intent-filter>
         </receiver>
     </application>

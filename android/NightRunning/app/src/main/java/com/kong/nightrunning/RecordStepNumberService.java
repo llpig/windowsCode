@@ -4,7 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,7 +12,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -20,12 +19,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class RecordStepNumberService extends Service implements SensorEventListener {
-    //今日新增步数
+    //今日新增步数=今日新增步数+当前记录
     private static int todayAddStepNumber = 0;
-    private int[] stepData = new int[]{0, 0};
-    //数据库
-//    NightRunDatabase databaseHelper = MainActivity.databaseHelper;
-//    SQLiteDatabase db = databaseHelper.getReadableDatabase();
+    //获取数据库
+    public NightRunDatabase helper = new NightRunDatabase(this, "NightRunning", null, 1);
+//    SQLiteDatabase db = helper.getReadableDatabase();
 
     @Nullable
     @Override
@@ -33,33 +31,11 @@ public class RecordStepNumberService extends Service implements SensorEventListe
         return null;
     }
 
-    //生成
     @Override
     public void onCreate() {
         super.onCreate();
-        getSensor();
-        final Intent intent = new Intent();
-        intent.setAction(getPackageName() + ".UPDATESTEPNUMBER_BROADCAST");
-        final Bundle bundle = new Bundle();
-        int delayTime = 0, periodTime = 1000;
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                bundle.putInt("currentStepNumber", todayAddStepNumber);
-                intent.putExtras(bundle);
-                //发送广播
-                sendBroadcast(intent);
-                //停止前台服务
-                stopForeground(Tool.MessageTypeEnum.FOREGROUNDSERVICE.getIndex());
-                //重新启动前台服务
-                startForeground(Tool.MessageTypeEnum.FOREGROUNDSERVICE.getIndex(),getNotification(String.valueOf(todayAddStepNumber)));
-                //模拟更新数据
-                todayAddStepNumber += 10;
-            }
-        };
-        Timer timer = new Timer();
-        //每隔30s，检测一次数据，如果数据有更新则发送一次广播，通知UI线程更新UI
-        timer.schedule(timerTask, delayTime, periodTime);
+        ServiceThread thread=new ServiceThread();
+        thread.start();
     }
 
     @Override
@@ -67,6 +43,34 @@ public class RecordStepNumberService extends Service implements SensorEventListe
         startForeground(Tool.MessageTypeEnum.FOREGROUNDSERVICE.getIndex(), getNotification(null)
         );
         return START_STICKY;
+    }
+
+    private class ServiceThread extends Thread {
+        public void run(){
+            getSensor();
+            final Intent intent = new Intent();
+            intent.setAction(getPackageName() + ".UPDATESTEPNUMBER_BROADCAST");
+            final Bundle bundle = new Bundle();
+            intent.putExtras(bundle);
+            int delayTime = 0, periodTime = 1000;
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    bundle.putInt("currentStepNumber", todayAddStepNumber);
+                    //发送广播
+                    sendBroadcast(intent);
+                    //停止前台服务
+                    stopForeground(Tool.MessageTypeEnum.FOREGROUNDSERVICE.getIndex());
+                    //重新启动前台服务
+                    startForeground(Tool.MessageTypeEnum.FOREGROUNDSERVICE.getIndex(), getNotification(String.valueOf(todayAddStepNumber)));
+                    //模拟更新数据
+                    todayAddStepNumber+=20;
+                }
+            };
+            Timer timer = new Timer();
+            //每隔30s，检测一次数据，如果数据有更新则发送一次广播，通知UI线程更新UI
+            timer.schedule(timerTask, delayTime, periodTime);
+        }
     }
 
     private Notification getNotification(String contentText) {
@@ -94,7 +98,7 @@ public class RecordStepNumberService extends Service implements SensorEventListe
         return todayAddStepNumber;
     }
 
-    //从计步总数传感器、单步计步器、加速度传感器中任选一个
+    //获取并注册加速度传感器
     private void getSensor() {
         //获取传感器管理类(计步总数传感器、单步计数传感器、加速度传感器三选一)
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -118,15 +122,7 @@ public class RecordStepNumberService extends Service implements SensorEventListe
     public void onSensorChanged(SensorEvent event) {
         switch (event.sensor.getType()) {
             case Sensor.TYPE_STEP_COUNTER: {
-//                //stepData=databaseHelper.selectRecords(db);
-//                //今日起始步数为0,从此时开始记录步数
-//                if(stepData[0]==0){
-//                    databaseHelper.updateRecords(db,(int)event.values[0],stepData[1]);
-//                    stepData[0]=(int)event.values[0];
-//                }
-//                todayAddStepNumber=(int)event.values[0]-stepData[0]+stepData[1];
-//                Log.v("database","今日起始步数："+String.valueOf(stepData[0])+"今日总步数："+String.valueOf(stepData[1])+
-//                        "今日累计步数："+String.valueOf(todayAddStepNumber));
+
             }
             case Sensor.TYPE_STEP_DETECTOR: {
 
@@ -143,4 +139,12 @@ public class RecordStepNumberService extends Service implements SensorEventListe
 
     }
 
+    //当服务被注销时需要将当数据存入数据库中
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //当服务关闭时，将数据库关闭
+
+        helper.close();
+    }
 }

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -11,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -30,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewTitle;
     private Button mButtonUserAvatar, mButtonSportsShow, mButtonRunning, mButtonSportsCircle;
     public Fragment mLastFragment, mSportsShowFragment, mRunningFragment, mSportsCircleFragment;
-    public static NightRunDatabase databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.initActivity();
         this.findViewAndSetOnClickListener();
-        databaseHelper=new NightRunDatabase(this,"NightRunning",null,1);
         //注册广播
         registerBroadcastReceiver();
         //启动服务
@@ -177,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 int todayStepNumber=intent.getExtras().getInt("currentStepNumber");
                 ((SportsShowFragment)mSportsShowFragment).updateTodayStopNumber(todayStepNumber);
             }
+            Log.v("message","服务有消息");
         }
     }
 
