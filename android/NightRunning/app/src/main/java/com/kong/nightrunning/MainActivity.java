@@ -178,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
                 int todayStepNumber=intent.getExtras().getInt("currentStepNumber");
                 ((SportsShowFragment)mSportsShowFragment).updateTodayStopNumber(todayStepNumber);
             }
-            Log.v("message","服务有消息");
         }
     }
 

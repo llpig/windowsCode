@@ -22,8 +22,6 @@ public class NightRunDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //仅在数据创建时调用一次
         db.execSQL(createStepNumberTable());
-        //用户第一次启动App
-        insertRecords(db, 0, 0);
     }
 
     //构造ContentValues
