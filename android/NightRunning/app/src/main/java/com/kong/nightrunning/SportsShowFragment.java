@@ -16,7 +16,7 @@ public class SportsShowFragment extends Fragment {
 
     private FragmentTransaction fragmentTransaction;
     private DetailedDataFragment mDetailedDataFragment, mNormalModeDetailedDataFragment, mRunningModeDetailedFragment;
-    private TextView mTextViewTodayNumber,mTextViewTargetNumber;
+    private TextView mTextViewTodayNumber, mTextViewTargetNumber;
 
     SportsShowFragment() {
         mDetailedDataFragment = new DetailedDataFragment();
@@ -40,30 +40,34 @@ public class SportsShowFragment extends Fragment {
         updateDetailedData();
     }
 
-    private void findView(View view){
-        mTextViewTodayNumber=view.findViewById(R.id.TextViewTodayNumber);
-        mTextViewTargetNumber=view.findViewById(R.id.TextViewTargetNumber);
+    private void findView(View view) {
+        mTextViewTodayNumber = view.findViewById(R.id.TextViewTodayNumber);
+        mTextViewTodayNumber.setText(String.valueOf(NightRunningService.getCurrentTotalStepNumber()));
+        mTextViewTargetNumber = view.findViewById(R.id.TextViewTargetNumber);
     }
 
-    private void initFragment(){
+    private void initFragment() {
         fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.LayoutDetailedData, mDetailedDataFragment);
         fragmentTransaction.add(R.id.LayoutNormalModeDetailedData, mNormalModeDetailedDataFragment);
         fragmentTransaction.add(R.id.LayoutRunningModeDetailedData, mRunningModeDetailedFragment);
         fragmentTransaction.commit();
     }
+
     //更新今日步数
-    public void updateTodayStopNumber(int stopNumber){
+    public void updateTodayStopNumber(int stopNumber) {
         mTextViewTodayNumber.setText(String.valueOf(stopNumber));
         updateDetailedData();
     }
+
     //更新目标步数
-    public void updateTargetStopNumber(int targetNumber){
-        mTextViewTargetNumber.setText("目标步数:"+String.valueOf(targetNumber));
+    public void updateTargetStopNumber(int targetNumber) {
+        mTextViewTargetNumber.setText("目标步数:" + String.valueOf(targetNumber));
     }
+
     //更新详细数据
-    private void updateDetailedData(){
-        mNormalModeDetailedDataFragment.setTextViewData("普通模式","0","0","0","0","0");
-        mRunningModeDetailedFragment.setTextViewData("跑步模式","0","0","0","0","0");
+    private void updateDetailedData() {
+        mNormalModeDetailedDataFragment.setTextViewData("普通模式", "0", "0", "0", "0", "0");
+        mRunningModeDetailedFragment.setTextViewData("跑步模式", "0", "0", "0", "0", "0");
     }
 }

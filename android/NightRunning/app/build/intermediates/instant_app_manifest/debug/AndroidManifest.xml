@@ -24,7 +24,10 @@
         <activity android:name="com.kong.nightrunning.PersonalCenterActivity" />
         <activity android:name="com.kong.nightrunning.UserRegisteredActivity" />
         <activity android:name="com.kong.nightrunning.UserLoginActivity" />
-        <activity android:name="com.kong.nightrunning.MainActivity" >
+        <!-- 栈定复用 -->
+        <activity
+            android:name="com.kong.nightrunning.MainActivity"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +35,7 @@
             </intent-filter>
         </activity>
         <!-- 服务 -->
-        <service android:name="com.kong.nightrunning.RecordStepNumberService" />
+        <service android:name="com.kong.nightrunning.NightRunningService" />
         <!-- 广播,服务可能被杀死，所以在清单文件中注册 -->
         <receiver android:name="com.kong.nightrunning.NightRunningBroadcastReceiver" >
             <intent-filter>

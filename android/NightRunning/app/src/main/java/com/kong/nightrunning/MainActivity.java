@@ -4,33 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     private Tool tool;
     private TextView mTextViewTitle;
+    private Intent serviceIntent;
+    private CustomBroadCastReceiver customBroadCastReceiver;
+    private NightRunningBroadcastReceiver nightRunningBroadcastReceiver;
     private Button mButtonUserAvatar, mButtonSportsShow, mButtonRunning, mButtonSportsCircle;
     public Fragment mLastFragment, mSportsShowFragment, mRunningFragment, mSportsCircleFragment;
 
@@ -43,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         //注册广播
         registerBroadcastReceiver();
         //启动服务
-        startService(new Intent(MainActivity.this, RecordStepNumberService.class));
+        serviceIntent=new Intent(MainActivity.this, NightRunningService.class);
+        startService(serviceIntent);
     }
 
     //初始化Activity
@@ -110,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         mButtonRunning.setBackgroundResource(R.drawable.running_black);
         mButtonSportsCircle.setBackgroundResource(R.drawable.sports_circle_balck);
         fragmentLoadingManager(mSportsShowFragment);
-//        ((SportsShowFragment)mSportsShowFragment).updateDetailedData();
     }
 
     //跑步点击事件
@@ -161,25 +151,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //注册广播（通过广播来更新数据）
-    private void registerBroadcastReceiver(){
-        IntentFilter filter1=new IntentFilter();
-        filter1.addAction(getPackageName()+".UPDATESTEPNUMBER_BROADCAST");
-        registerReceiver(new CustomBroadCastReceiver(),filter1);
-        IntentFilter filter2=new IntentFilter();
+    private void registerBroadcastReceiver() {
+        IntentFilter filter1 = new IntentFilter();
+        filter1.addAction(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex());
+        filter1.addAction(Tool.CustomBroadcast.NULLSERSOR.getIndex());
+        customBroadCastReceiver=new CustomBroadCastReceiver();
+        registerReceiver(customBroadCastReceiver, filter1);
+        IntentFilter filter2 = new IntentFilter();
         filter2.addAction(Intent.ACTION_TIME_TICK);
-        registerReceiver(new NightRunningBroadcastReceiver(),filter2);
+        nightRunningBroadcastReceiver=new NightRunningBroadcastReceiver();
+        registerReceiver(nightRunningBroadcastReceiver, filter2);
     }
 
     private class CustomBroadCastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().toString().equals(getPackageName()+".UPDATESTEPNUMBER_BROADCAST")){
-                int todayStepNumber=intent.getExtras().getInt("currentStepNumber");
-                ((SportsShowFragment)mSportsShowFragment).updateTodayStopNumber(todayStepNumber);
+            String actionStr = intent.getAction().toString();
+            if (actionStr.equals(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex())) {
+                int todayStepNumber = intent.getExtras().getInt(String.valueOf(Tool.MessageType.CURRENTSTEPNUMBERKEY.getIndex()));
+                ((SportsShowFragment) mSportsShowFragment).updateTodayStopNumber(todayStepNumber);
+            } else if (actionStr.equals(Tool.CustomBroadcast.NULLSERSOR.getIndex())) {
+                tool.hintMessage(MainActivity.this, "该设备没有适合的传感器");
+                //停止服务
+                stopService(serviceIntent);
             }
         }
+
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //注销广播接收者
+        unregisterReceiver(customBroadCastReceiver);
+        unregisterReceiver(nightRunningBroadcastReceiver);
+        Log.v("message", "MainActivity注销");
+    }
 }
