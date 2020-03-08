@@ -23,12 +23,6 @@
         </activity>
         <!--服务-->
         <service android:name=".NightRunningService" />
-        <!--广播,服务可能被杀死，所以在清单文件中注册-->
-        <receiver android:name=".NightRunningBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

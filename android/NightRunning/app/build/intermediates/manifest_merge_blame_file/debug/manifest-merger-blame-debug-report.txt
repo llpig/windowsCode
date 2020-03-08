@@ -12,7 +12,7 @@
 10
 11    <!-- 活动 -->
 12    <application
-12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-32:19
+12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-26:19
 13        android:allowBackup="true"
 13-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:6:9-35
 14        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -61,17 +61,6 @@
 37        <service android:name="com.kong.nightrunning.NightRunningService" />
 37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:9-56
 37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:18-53
-38        <!-- 广播,服务可能被杀死，所以在清单文件中注册 -->
-39        <receiver android:name="com.kong.nightrunning.NightRunningBroadcastReceiver" >
-39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:9-31:20
-39-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:27:19-64
-40            <intent-filter>
-40-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:28:13-30:29
-41                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-41-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:29:17-80
-41-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:29:25-77
-42            </intent-filter>
-43        </receiver>
-44    </application>
-45
-46</manifest>
+38    </application>
+39
+40</manifest>

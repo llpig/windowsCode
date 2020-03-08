@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -21,7 +20,10 @@ public class NightRunningDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //仅在数据创建时调用一次
-        db.execSQL(createStepNumberTable());
+        db.execSQL(createUserInfoTable());
+        db.execSQL(createMotionInfoTable());
+        db.execSQL(createMovementLocusTable());
+        db.execSQL(createAchievementTable());
     }
 
     //构造ContentValues
@@ -55,11 +57,21 @@ public class NightRunningDatabase extends SQLiteOpenHelper {
     //查询记录
     public int[] selectRecords(SQLiteDatabase db) {
         int startStepNumber = -1, totalStepNumber = -1;
-        Cursor cursor = db.query(tableName, new String[]{fieldName2, fieldName3}, fieldName1 + "=(select date('now','localtime'))", null, null, null, null);
+        String whereStr = "=(select date('now','localtime'))";
+        Cursor cursor = db.query(tableName, new String[]{fieldName2, fieldName3}, fieldName1 + whereStr, null, null, null, null);
         //如果当前记录不存在，则创建该记录。
         while (cursor.getCount() == 0) {
-            insertRecords(db, 0, 0);
-            cursor = db.query(tableName, new String[]{fieldName2, fieldName3}, fieldName1 + "=(select date('now','localtime'))", null, null, null, null);
+            int[] stepNumber = selectRecordsBeforeDay(db);
+            int sum = stepNumber[0] + stepNumber[1];
+            if (sum >= 0) {
+                insertRecords(db, sum, 0);
+            } else {
+                //第一次启动App或者长时间没有启动App数据库没有创建出对应的数据表
+                insertRecords(db, 0, 0);
+            }
+            //重新查询
+
+            cursor = db.query(tableName, new String[]{fieldName2, fieldName3}, fieldName1 + whereStr, null, null, null, null);
         }
         while (cursor.moveToNext()) {
             startStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName2));
@@ -68,12 +80,73 @@ public class NightRunningDatabase extends SQLiteOpenHelper {
         return new int[]{startStepNumber, totalStepNumber};
     }
 
-    //创建今日“今日步数表”(日期：主键，跑步步数，普通步数)
-    private String createStepNumberTable() {
-        String sql = "CREATE TABLE StepNumber_table (" +
-                "[date] date NOT NULL DEFAULT (date('now','localtime')) PRIMARY KEY," +
-                "[startStepNumber] int," +
-                "[totalStepNumber] int);";
+    //查询前一天记录
+    public int[] selectRecordsBeforeDay(SQLiteDatabase db) {
+        int startStepNumber = -1, totalStepNumber = -1;
+        String whereStr = "=(select date('now','localtime','-1 days'))";
+        Cursor cursor = db.query(tableName, new String[]{fieldName2, fieldName3}, fieldName1 + whereStr, null, null, null, null);
+        while (cursor.moveToNext()) {
+            startStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName2));
+            totalStepNumber = cursor.getInt(cursor.getColumnIndex(fieldName3));
+        }
+        return new int[]{startStepNumber, totalStepNumber};
+    }
+
+    //返回创建用户信息表的SQL语句
+    private String createUserInfoTable() {
+        String sql = "create Table UserInfoTable (\n" +
+                "[UserId]              INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "[UserName]            varchar(64)              Not Null,\n" +
+                "[Password]            varchar(32)              Not Null,\n" +
+                "[Sex]                 boolean                  Not Null,\n" +
+                "[Age]                 int      check(Age>0)    Not Null,\n" +
+                "[Height]              double   check(Height>0) Not Null,\n" +
+                "[Weight]              double   check(Weight>0) Not Null,\n" +
+                "[TargetStepNumber]    int      check(TargetStepNumber>0) default 0,\n" +
+                "[TargetMileage]       int      check(TargetMileage)      default 0,\n" +
+                "[Avatar]              varchar(255),\n" +
+                "[Signature]           varchar(255),\n" +
+                "[Email]               varchar(320)\n" +
+                ");";
+        return sql;
+    }
+
+    //返回创建运动信息表的SQL语句
+    private String createMotionInfoTable() {
+        String sql = "Create Table MotionInfoTable (\n" +
+                "[UserName]            varchar(64),\n" +
+                "[Date]                date Not Null DEFAULT (date('now','localtime')) PRIMARY KEY,\n" +
+                "[StepNumber]          int Not Null default 0,\n" +
+                "[Mileage]             double default 0,\n" +
+                "[RunningStartTime]    time, \n" +
+                "[RunningFinishTime]   time,\n" +
+                "[EquipmentInfo]       boolean default 0,\n" +
+                "FOREIGN KEY(UserName) REFERENCES UserInfoTable(UserName)\n" +
+                ");";
+        return sql;
+    }
+
+    //返回运动轨迹表的SQL语句
+    private String createMovementLocusTable() {
+        String sql = "Create Table MovementLocusTable (\n" +
+                "[UserName]            varchar(64),\n" +
+                "[MovementLocus]       varchar(255),\n" +
+                "[CreateTime]          datetime     Not Null,\n" +
+                "Primary Key(UserName,MovementLocus),\n" +
+                "Foreign Key(UserName) References UserInfoTable(UserName) \n" +
+                ");";
+        return sql;
+    }
+
+    //返回创建个人成就表SQL语句
+    private String createAchievementTable() {
+        String sql = "Create Table AchievementTable (\n" +
+                "[UserName]           varchar(64) ,\n" +
+                "[Achievement]        varchar(255),\n" +
+                "[completeTime]       datetime     Not Null,\n" +
+                "Primary Key(UserName,Achievement),\n" +
+                "Foreign Key(UserName) References UserInfoTable(UserName)\n" +
+                ");";
         return sql;
     }
 

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Process;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewTitle;
     private Intent serviceIntent;
     private CustomBroadCastReceiver customBroadCastReceiver;
-    private NightRunningBroadcastReceiver nightRunningBroadcastReceiver;
     private Button mButtonUserAvatar, mButtonSportsShow, mButtonRunning, mButtonSportsCircle;
     public Fragment mLastFragment, mSportsShowFragment, mRunningFragment, mSportsCircleFragment;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         //注册广播
         registerBroadcastReceiver();
         //启动服务
-        serviceIntent=new Intent(MainActivity.this, NightRunningService.class);
+        serviceIntent = new Intent(MainActivity.this, NightRunningService.class);
         startService(serviceIntent);
     }
 
@@ -152,15 +152,11 @@ public class MainActivity extends AppCompatActivity {
 
     //注册广播（通过广播来更新数据）
     private void registerBroadcastReceiver() {
-        IntentFilter filter1 = new IntentFilter();
-        filter1.addAction(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex());
-        filter1.addAction(Tool.CustomBroadcast.NULLSERSOR.getIndex());
-        customBroadCastReceiver=new CustomBroadCastReceiver();
-        registerReceiver(customBroadCastReceiver, filter1);
-        IntentFilter filter2 = new IntentFilter();
-        filter2.addAction(Intent.ACTION_TIME_TICK);
-        nightRunningBroadcastReceiver=new NightRunningBroadcastReceiver();
-        registerReceiver(nightRunningBroadcastReceiver, filter2);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex());
+        filter.addAction(Tool.CustomBroadcast.NULLSERSOR.getIndex());
+        customBroadCastReceiver = new CustomBroadCastReceiver();
+        registerReceiver(customBroadCastReceiver, filter);
     }
 
     private class CustomBroadCastReceiver extends BroadcastReceiver {
@@ -177,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                 stopService(serviceIntent);
             }
         }
-
     }
 
     @Override
@@ -185,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         //注销广播接收者
         unregisterReceiver(customBroadCastReceiver);
-        unregisterReceiver(nightRunningBroadcastReceiver);
         Log.v("message", "MainActivity注销");
     }
 }
