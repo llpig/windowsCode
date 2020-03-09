@@ -4,6 +4,7 @@ ADDED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:1-28:
 INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:1-28:12
 INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:1-28:12
 INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:1-28:12
+MERGED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:20:1-40:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\637e87538cdf6aea5141591760a2054a\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1188dea4964e3679c4558ac5cf5ba796\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
@@ -44,6 +45,8 @@ INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:1-
 		ADDED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:11-69
 application
 ADDED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-26:19
+MERGED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:32:5-38:19
+MERGED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:32:5-38:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.core:core:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\77be7d3270c29f3380dfe0027fd17a86\core-1.1.0\AndroidManifest.xml:24:5-89
@@ -100,6 +103,8 @@ uses-sdk
 INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
 INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
+MERGED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:25:5-27:41
+MERGED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:25:5-27:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\637e87538cdf6aea5141591760a2054a\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\637e87538cdf6aea5141591760a2054a\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:5:5-7:41
@@ -152,3 +157,21 @@ INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
 		INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
 		ADDED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
 		INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:29:5-67
+	android:name
+		ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:29:22-64
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:30:5-76
+	android:name
+		ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:30:22-73
+provider#com.amitshekhar.DebugDBInitProvider
+ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:33:9-37:40
+	android:enabled
+		ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:36:13-35
+	android:authorities
+		ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:35:13-71
+	android:exported
+		ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:37:13-37
+	android:name
+		ADDED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:34:13-63

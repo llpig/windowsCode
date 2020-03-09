@@ -63,9 +63,9 @@ public class NightRunningService extends Service implements SensorEventListener 
             registerBroadcastReceiver();
             helper = new NightRunningDatabase(getApplicationContext(), "NightRunning", null, 1);
             db=helper.getReadableDatabase();
-            int[] stepNumber = helper.selectRecords(db);
-            todayStartStepNumber = stepNumber[0];
-            todayShutdownStepNumber = stepNumber[1];
+//            int[] stepNumber = helper.selectRecords(db);
+//            todayStartStepNumber = stepNumber[0];
+//            todayShutdownStepNumber = stepNumber[1];
             sendBroadcastToMainActivity();
         }
     }
@@ -175,15 +175,15 @@ public class NightRunningService extends Service implements SensorEventListener 
 
     //计算当前步数，不同的传感器调用不同的算法(计步器传感器)
     private void calcTodayStepNumber(int value) {
-        int[] stepNumber = helper.selectRecords(db);
-        //1、防止服务被杀死数据在一天内更新多次，2、防止设备关机后的错误更新。
-        if (stepNumber[0] + stepNumber[1] == 0) {
-            helper.updateRecords(db, value, 0, true);
-            stepNumber = helper.selectRecords(db);
-            todayStartStepNumber = stepNumber[0];
-            todayShutdownStepNumber = stepNumber[1];
-        }
-        todayAddStepNumber = todayShutdownStepNumber + (value - todayStartStepNumber);
+//        int[] stepNumber = helper.selectRecords(db);
+//        //1、防止服务被杀死数据在一天内更新多次，2、防止设备关机后的错误更新。
+//        if (stepNumber[0] + stepNumber[1] == 0) {
+//            helper.updateRecords(db, value, 0, true);
+//            stepNumber = helper.selectRecords(db);
+//            todayStartStepNumber = stepNumber[0];
+//            todayShutdownStepNumber = stepNumber[1];
+//        }
+//        todayAddStepNumber = todayShutdownStepNumber + (value - todayStartStepNumber);
     }
 
     //单步记步传感器
@@ -214,12 +214,12 @@ public class NightRunningService extends Service implements SensorEventListener 
             SQLiteDatabase db = helper.getReadableDatabase();
             int currentStepNumber = NightRunningService.getCurrentTotalStepNumber();
             //从数据库中取出今日计数器传感器的起始数据（如果采用单步计数器和加速度传感器该数据为0）
-            int startStepNumber = (helper.selectRecords(db))[0];
+//            int startStepNumber = (helper.selectRecords(db))[0];
             switch (action) {
                 //关机
                 case Intent.ACTION_SHUTDOWN: {
                     //将当前数据更新入数据中
-                    helper.updateRecords(db, 0, currentStepNumber, true);
+//                    helper.updateRecords(db, 0, currentStepNumber, true);
                 }
                 //日期改变
                 case Intent.ACTION_TIME_TICK: {
@@ -228,10 +228,10 @@ public class NightRunningService extends Service implements SensorEventListener 
                     int minute = calendar.get(Calendar.MINUTE);
                     int second = calendar.get(Calendar.SECOND);
                     if (hour == 0 && minute == 0 && second == 0) {
-                        //将前一天的数据更新入数据库中
-                        helper.updateRecords(db, startStepNumber, currentStepNumber, false);
-                        //插入一条今天新的记录
-                        helper.insertRecords(db, startStepNumber + currentStepNumber, 0);
+//                        //将前一天的数据更新入数据库中
+//                        helper.updateRecords(db, startStepNumber, currentStepNumber, false);
+//                        //插入一条今天新的记录
+//                        helper.insertRecords(db, startStepNumber + currentStepNumber, 0);
                     }
                 }
             }
@@ -249,7 +249,7 @@ public class NightRunningService extends Service implements SensorEventListener 
     private void closeDatabase() {
         //当服务被注销时需要将当数据存入数据库中
         if (mSensor.getType() == Sensor.TYPE_STEP_DETECTOR || mSensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            helper.updateRecords(helper.getReadableDatabase(), 0, getCurrentTotalStepNumber(), true);
+//            helper.updateRecords(helper.getReadableDatabase(), 0, getCurrentTotalStepNumber(), true);
         }
         //当服务关闭时，将数据库关闭
         helper.close();

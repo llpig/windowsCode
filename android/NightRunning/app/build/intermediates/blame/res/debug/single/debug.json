@@ -12,12 +12,12 @@
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_running.xml"
     },
     {
-        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
-    },
-    {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
     },
     {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_personal_center.xml.flat",
@@ -36,12 +36,12 @@
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\running_red.png"
     },
     {
-        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_running_black.png.flat",
-        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\running_black.png"
-    },
-    {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_running_black.png.flat",
+        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\running_black.png"
     },
     {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_user_login.xml.flat",
@@ -52,12 +52,12 @@
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_sports_circle.xml"
     },
     {
-        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sports_show_black.png.flat",
-        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\sports_show_black.png"
-    },
-    {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_add_route.png.flat",
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\add_route.png"
+    },
+    {
+        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sports_show_black.png.flat",
+        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\sports_show_black.png"
     },
     {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
@@ -108,12 +108,12 @@
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_sports_show.xml.flat",
-        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_sports_show.xml"
-    },
-    {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_user_route.png.flat",
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\user_route.png"
+    },
+    {
+        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_sports_show.xml.flat",
+        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_sports_show.xml"
     },
     {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_user_avatar.png.flat",

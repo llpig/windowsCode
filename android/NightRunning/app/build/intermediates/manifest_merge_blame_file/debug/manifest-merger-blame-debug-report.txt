@@ -10,57 +10,73 @@
 9        android:targetSdkVersion="29" />
 9-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml
 10
-11    <!-- 活动 -->
-12    <application
-12-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-26:19
-13        android:allowBackup="true"
-13-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:6:9-35
-14        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-14-->[androidx.core:core:1.1.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\77be7d3270c29f3380dfe0027fd17a86\core-1.1.0\AndroidManifest.xml:24:18-86
-15        android:debuggable="true"
-16        android:extractNativeLibs="false"
-17        android:icon="@mipmap/ic_launcher"
-17-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:7:9-43
-18        android:label="@string/app_name"
-18-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:8:9-41
-19        android:roundIcon="@mipmap/ic_launcher_round"
-19-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:9:9-54
-20        android:supportsRtl="true"
-20-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:10:9-35
-21        android:testOnly="true"
-22        android:theme="@style/AppTheme" >
-22-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:11:9-40
-23        <activity android:name="com.kong.nightrunning.PersonalCenterActivity" />
-23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:9-60
-23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:19-57
-24        <activity android:name="com.kong.nightrunning.UserRegisteredActivity" />
-24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:9-60
-24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:19-57
-25        <activity android:name="com.kong.nightrunning.UserLoginActivity" />
-25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:9-55
-25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:19-52
-26        <!-- 栈定复用 -->
-27        <activity
-27-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:16:9-23:20
-28            android:name="com.kong.nightrunning.MainActivity"
-28-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:17:13-41
-29            android:launchMode="singleTop" >
-29-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:18:13-43
-30            <intent-filter>
-30-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:19:13-22:29
-31                <action android:name="android.intent.action.MAIN" />
-31-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:20:17-69
-31-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:20:25-66
-32
-33                <category android:name="android.intent.category.LAUNCHER" />
-33-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:21:17-77
-33-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:21:27-74
-34            </intent-filter>
-35        </activity>
-36        <!-- 服务 -->
-37        <service android:name="com.kong.nightrunning.NightRunningService" />
-37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:9-56
-37-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:18-53
-38    </application>
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:29:5-67
+11-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:29:22-64
+12    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 活动 -->
+12-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:30:5-76
+12-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:30:22-73
+13    <application
+13-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:5:5-26:19
+14        android:allowBackup="true"
+14-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:6:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.1.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\77be7d3270c29f3380dfe0027fd17a86\core-1.1.0\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:extractNativeLibs="false"
+18        android:icon="@mipmap/ic_launcher"
+18-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:7:9-43
+19        android:label="@string/app_name"
+19-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:8:9-41
+20        android:roundIcon="@mipmap/ic_launcher_round"
+20-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:9:9-54
+21        android:supportsRtl="true"
+21-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:10:9-35
+22        android:testOnly="true"
+23        android:theme="@style/AppTheme" >
+23-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:11:9-40
+24        <activity android:name="com.kong.nightrunning.PersonalCenterActivity" />
+24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:9-60
+24-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:12:19-57
+25        <activity android:name="com.kong.nightrunning.UserRegisteredActivity" />
+25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:9-60
+25-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:13:19-57
+26        <activity android:name="com.kong.nightrunning.UserLoginActivity" />
+26-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:9-55
+26-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:14:19-52
+27        <!-- 栈定复用 -->
+28        <activity
+28-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:16:9-23:20
+29            android:name="com.kong.nightrunning.MainActivity"
+29-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:17:13-41
+30            android:launchMode="singleTop" >
+30-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:18:13-43
+31            <intent-filter>
+31-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:19:13-22:29
+32                <action android:name="android.intent.action.MAIN" />
+32-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:20:17-69
+32-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:20:25-66
+33
+34                <category android:name="android.intent.category.LAUNCHER" />
+34-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:21:17-77
+34-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:21:27-74
+35            </intent-filter>
+36        </activity>
+37        <!-- 服务 -->
+38        <service android:name="com.kong.nightrunning.NightRunningService" />
+38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:9-56
+38-->E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:25:18-53
 39
-40</manifest>
+40        <provider
+40-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:33:9-37:40
+41            android:name="com.amitshekhar.DebugDBInitProvider"
+41-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:34:13-63
+42            android:authorities="com.kong.nightrunning.DebugDBInitProvider"
+42-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:35:13-71
+43            android:enabled="true"
+43-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:36:13-35
+44            android:exported="false" />
+44-->[com.amitshekhar.android:debug-db:1.0.0] C:\Users\孔晨瑞\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:37:13-37
+45    </application>
+46
+47</manifest>

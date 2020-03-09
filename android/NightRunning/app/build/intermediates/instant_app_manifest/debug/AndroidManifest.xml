@@ -9,7 +9,8 @@
         android:minSdkVersion="24"
         android:targetSdkVersion="29" />
 
-    <!-- 活动 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 活动 -->
     <application
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -36,6 +37,12 @@
         </activity>
         <!-- 服务 -->
         <service android:name="com.kong.nightrunning.NightRunningService" />
+
+        <provider
+            android:name="com.amitshekhar.DebugDBInitProvider"
+            android:authorities="com.kong.nightrunning.DebugDBInitProvider"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
