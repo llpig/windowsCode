@@ -1,18 +1,16 @@
 package com.kong.nightrunning;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -23,18 +21,23 @@ import androidx.annotation.Nullable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class NightRunningService extends Service implements SensorEventListener {
-    //今日新增步数=今日新增步数+当前记录
-    private static int todayAddStepNumber = 0;
-    private int lastTodayAddStepNumber = todayAddStepNumber;
+public class NightRunningService extends Service {
     private Sensor mSensor;
-    private int todayStartStepNumber = -1;
-    private int todayShutdownStepNumber = -1;
-    private SQLiteDatabase db;
     //数据库
-    public static NightRunningDatabase helper;
+    private NightRunningDatabase helper;
+    private SQLiteDatabase db;
+    private SharedPreferences preferences;
+    private String userName;
     //广播接收者
     private BroadcastReceiver broadcastReceiver;
+    //工具类
+    private Tool tool;
+    private Tool.NightRunningDB nightRunningDB;
+
+    ContentValues values;
+    int lastTodayAddStepNumber;
+
+    NightRunningSensorEventListener sensorEventListener;
 
     @Nullable
     @Override
@@ -42,48 +45,64 @@ public class NightRunningService extends Service implements SensorEventListener 
         return null;
     }
 
-    //获取当前总步数
-    public static int getCurrentTotalStepNumber() {
-        return todayAddStepNumber;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
+        //测试数据（只允许本程序访问）
+        preferences = getSharedPreferences("test1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("userName", "测试1");
+        editor.commit();
         initService();
     }
 
     //初始化服务器
     private void initService() {
-        if (registerSensor() == false) {
-            Intent intent = new Intent().setAction(Tool.CustomBroadcast.NULLSERSOR.getIndex());
-            sendBroadcast(intent);
-            stopForeground(Tool.MessageType.FOREGROUNDSERVICE.getIndex());
-        } else {
+        tool = new Tool();
+        nightRunningDB = tool.new NightRunningDB();
+        userName = preferences.getString("userName", "");
+        helper = new NightRunningDatabase(getApplicationContext(), "NightRunning", null, 1);
+        db = helper.getReadableDatabase();
+        sensorEventListener = new NightRunningSensorEventListener();
+        initRelevantData();
+        mSensor = sensorEventListener.registerSensor(this);
+        if (mSensor != null) {
             registerBroadcastReceiver();
-            helper = new NightRunningDatabase(getApplicationContext(), "NightRunning", null, 1);
-            db=helper.getReadableDatabase();
-//            int[] stepNumber = helper.selectRecords(db);
-//            todayStartStepNumber = stepNumber[0];
-//            todayShutdownStepNumber = stepNumber[1];
             sendBroadcastToMainActivity();
         }
     }
 
+    //初始化相关数据
+    private boolean initRelevantData() {
+        boolean bRet = true;
+        values = helper.selectRecordsToMotionInfoTable(db, userName, "date('now','localtime')");
+        //如果values的值为0,则说明该当天跑步记录没有被创建。
+        if (values.size() == 0) {
+            if (helper.insertRecordsToMotionInfoTable(db, userName)) {
+                //重新查询
+                values = helper.selectRecordsToMotionInfoTable(db, userName, "date('now','localtime')");
+            } else {
+                //如果没有创建成功，则提醒用户登录,并发送广播，退出服务
+                bRet = false;
+            }
+        } else {
+            lastTodayAddStepNumber = 0;
+            int startStepNumber = (int) values.get(nightRunningDB.motionInfoTable.stepNumber);
+            int isOff = (int) values.get(nightRunningDB.motionInfoTable.equipmentInfo);
+            Log.v("message", "startStepNumber:" + startStepNumber + ",isOff:" + isOff);
+            sensorEventListener.updateData(startStepNumber, isOff);
+        }
+        return bRet;
+    }
+
     //发送广播，通知MainActivity
     private void sendBroadcastToMainActivity() {
-        final Intent intent = new Intent();
-        intent.setAction(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex());
-        final Bundle bundle = new Bundle();
         int delayTime = 0, periodTime = 3000;
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
+                int todayAddStepNumber = sensorEventListener.getTodayAddStepNumber();
                 if (lastTodayAddStepNumber != todayAddStepNumber) {
-                    bundle.putInt(String.valueOf(Tool.MessageType.CURRENTSTEPNUMBERKEY.getIndex()), todayAddStepNumber);
-                    intent.putExtras(bundle);
-                    //发送广播
-                    sendBroadcast(intent);
                     //启动前台服务(更换文字)
                     startForeground(Tool.MessageType.FOREGROUNDSERVICE.getIndex(), getNotification(String.valueOf(todayAddStepNumber)));
                     lastTodayAddStepNumber = todayAddStepNumber;
@@ -123,119 +142,16 @@ public class NightRunningService extends Service implements SensorEventListener 
         return builder.getNotification();
     }
 
-    private void registerBroadcastReceiver(){
-        IntentFilter filter=new IntentFilter();
+    private void registerBroadcastReceiver() {
+        IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_TIME_TICK);
         filter.addAction(Intent.ACTION_SHUTDOWN);
-        broadcastReceiver=new NightRunningBroadcastReceiver();
-        registerReceiver(broadcastReceiver,filter);
+        broadcastReceiver = new NightRunningBroadcastReceiver();
+        registerReceiver(broadcastReceiver, filter);
     }
 
-    //获取并注册加速度传感器
-    private boolean registerSensor() {
-        boolean bRet = false;
-        //获取传感器管理类(计步总数传感器、单步计数传感器、加速度传感器三选一)
-        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        //计录总数传感器
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        if (sensor == null) {
-            //单步计数传感器
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-            if (sensor == null) {
-                //加速度传感器
-                sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            }
-        }
-        if (sensor != null) {
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-            mSensor = sensor;
-            bRet = true;
-        }
-        return bRet;
-    }
-
-    //当传感器的数值发生变化时，会自动调用该接口
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        switch (event.sensor.getType()) {
-            case Sensor.TYPE_STEP_COUNTER: {
-                calcTodayStepNumber(((int) event.values[0]));
-                break;
-            }
-            case Sensor.TYPE_STEP_DETECTOR: {
-                calcTodayStepNumber(event.values[0]);
-                break;
-            }
-            case Sensor.TYPE_ACCELEROMETER: {
-                calcTodayStepNumber(event.values[0], event.values[1], event.values[2]);
-                break;
-            }
-        }
-    }
-
-    //计算当前步数，不同的传感器调用不同的算法(计步器传感器)
-    private void calcTodayStepNumber(int value) {
-//        int[] stepNumber = helper.selectRecords(db);
-//        //1、防止服务被杀死数据在一天内更新多次，2、防止设备关机后的错误更新。
-//        if (stepNumber[0] + stepNumber[1] == 0) {
-//            helper.updateRecords(db, value, 0, true);
-//            stepNumber = helper.selectRecords(db);
-//            todayStartStepNumber = stepNumber[0];
-//            todayShutdownStepNumber = stepNumber[1];
-//        }
-//        todayAddStepNumber = todayShutdownStepNumber + (value - todayStartStepNumber);
-    }
-
-    //单步记步传感器
-    private void calcTodayStepNumber(float value) {
-        if (value == 1.0) {
-            todayAddStepNumber += 1;
-        }
-    }
-
-    //加速度传感器
-    private void calcTodayStepNumber(float xValue, float yValue, float zValue) {
-
-        todayAddStepNumber += 1;
-    }
-
-    //当传感器的精度发生变化时，会自动调用该接口
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
-
-    public class NightRunningBroadcastReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            NightRunningDatabase helper = NightRunningService.helper;
-            SQLiteDatabase db = helper.getReadableDatabase();
-            int currentStepNumber = NightRunningService.getCurrentTotalStepNumber();
-            //从数据库中取出今日计数器传感器的起始数据（如果采用单步计数器和加速度传感器该数据为0）
-//            int startStepNumber = (helper.selectRecords(db))[0];
-            switch (action) {
-                //关机
-                case Intent.ACTION_SHUTDOWN: {
-                    //将当前数据更新入数据中
-//                    helper.updateRecords(db, 0, currentStepNumber, true);
-                }
-                //日期改变
-                case Intent.ACTION_TIME_TICK: {
-                    Calendar calendar = Calendar.getInstance();
-                    int hour = calendar.get(Calendar.HOUR);
-                    int minute = calendar.get(Calendar.MINUTE);
-                    int second = calendar.get(Calendar.SECOND);
-                    if (hour == 0 && minute == 0 && second == 0) {
-//                        //将前一天的数据更新入数据库中
-//                        helper.updateRecords(db, startStepNumber, currentStepNumber, false);
-//                        //插入一条今天新的记录
-//                        helper.insertRecords(db, startStepNumber + currentStepNumber, 0);
-                    }
-                }
-            }
-        }
+    public void sensorUpdateData(int startStepNumber){
+        helper.upDateRecordsToMotionInfoTableNormal(db,userName,"date('now','localtime')",startStepNumber,0);
     }
 
     @Override
@@ -249,9 +165,38 @@ public class NightRunningService extends Service implements SensorEventListener 
     private void closeDatabase() {
         //当服务被注销时需要将当数据存入数据库中
         if (mSensor.getType() == Sensor.TYPE_STEP_DETECTOR || mSensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-//            helper.updateRecords(helper.getReadableDatabase(), 0, getCurrentTotalStepNumber(), true);
+            helper.upDateRecordsToMotionInfoTableNormal(db, userName, "date('now','localtime')", sensorEventListener.getTodayAddStepNumber(), 0);
         }
         //当服务关闭时，将数据库关闭
         helper.close();
+    }
+
+    public class NightRunningBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                //关机
+                case Intent.ACTION_SHUTDOWN: {
+                    //将当前数据更新入数据中
+                    helper.upDateRecordsToMotionInfoTableNormal(db, userName, "date('now','localtime')", sensorEventListener.getTodayAddStepNumber(), 1);
+                }
+                //日期改变
+                case Intent.ACTION_TIME_TICK: {
+                    Calendar calendar = Calendar.getInstance();
+                    int hour = calendar.get(Calendar.HOUR);
+                    int minute = calendar.get(Calendar.MINUTE);
+                    int second = calendar.get(Calendar.SECOND);
+                    if (hour == 0 && minute == 0 && second == 0) {
+                        //将前一天的数据更新入数据库中
+                        helper.upDateRecordsToMotionInfoTableNormal(db, userName, "date('now','localtime','-1 days')", sensorEventListener.getTodayAddStepNumber(), 0);
+                        //插入一条今天新的记录
+                        helper.insertRecordsToMotionInfoTable(db, userName);
+                        //重新对数据进行初始化
+                        initRelevantData();
+                    }
+                }
+            }
+        }
     }
 }

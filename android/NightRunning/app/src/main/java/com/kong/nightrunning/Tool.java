@@ -51,4 +51,29 @@ public class Tool {
         toast.setText(message);
         toast.show();
     }
+
+    //保存数据相关信息
+    public class NightRunningDB {
+        UserInfoTable userInfoTable = new UserInfoTable();
+        MotionInfoTable motionInfoTable = new MotionInfoTable();
+        MovementLocusTable movementLocusTable = new MovementLocusTable();
+        AchievementTable achievementTable = new AchievementTable();
+
+        public class UserInfoTable {
+            String tableName = "UserInfoTable", userName = "UserName", password = "Password", sex = "Sex", height = "Height",
+                    weight = "Weight", age = "Age", targetStepNumber = "TargetStepNumber", targetMileage = "TargetMileage", avatar = "Avatar";
+        }
+
+        public class MotionInfoTable {
+            String tableName = "MotionInfoTable", userName = "UserName", date = "Date", runningStartTime = "RunningStartTime", runningFinishTime = "RunningFinishTime", stepNumber = "StepNumber", mileage = "Mileage", equipmentInfo = "EquipmentInfo";
+        }
+
+        public class MovementLocusTable {
+            String tableName = "MovementLocusTable", userName = "UserName", movementLocus = "MovementLocus";
+        }
+
+        public class AchievementTable {
+            String tableName = "AchievementTable", userName = "UserName", achievement = "Achievement";
+        }
+    }
 }

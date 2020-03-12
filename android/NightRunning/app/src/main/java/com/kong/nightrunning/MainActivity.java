@@ -15,12 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Tool tool;
+    private Tool tool=new Tool();
     private TextView mTextViewTitle;
     private Intent serviceIntent;
-    private CustomBroadCastReceiver customBroadCastReceiver;
     private Button mButtonUserAvatar, mButtonSportsShow, mButtonRunning, mButtonSportsCircle;
     public Fragment mLastFragment, mSportsShowFragment, mRunningFragment, mSportsCircleFragment;
 
@@ -28,20 +30,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.initActivity();
-        this.findViewAndSetOnClickListener();
-        //注册广播
-        registerBroadcastReceiver();
-        //启动服务
-        serviceIntent = new Intent(MainActivity.this, NightRunningService.class);
-        startService(serviceIntent);
+        startNightRunningService();
+        initActivity();
     }
 
     //初始化Activity
     private void initActivity() {
         //取消App的标题栏
         getSupportActionBar().hide();
-        tool = new Tool();
+        findViewAndSetOnClickListener();
         mTextViewTitle = findViewById(R.id.TextViewTitle);
         mSportsShowFragment = new SportsShowFragment();
         mRunningFragment = new RunningFragment();
@@ -50,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
         mLastFragment = mSportsShowFragment;
         //将运动展示界面作为App的首页
         getSupportFragmentManager().beginTransaction().add(R.id.LayoutContent, mSportsShowFragment).commit();
+    }
+
+    //启动服务
+    private void startNightRunningService() {
+        //启动服务
+        serviceIntent = new Intent(MainActivity.this, NightRunningService.class);
+        startService(serviceIntent);
+        if (NightRunningSensorEventListener.getTodayAddStepNumber() == -1) {
+            stopService(serviceIntent);
+            tool.hintMessage(MainActivity.this, "无可用传感器");
+        }else{
+            tool.hintMessage(MainActivity.this, "传感器已注册，系统已开始记录步数");
+        }
     }
 
     //Fragment管理(添加新的会导致之前的内容被覆盖)
@@ -150,36 +160,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //注册广播（通过广播来更新数据）
-    private void registerBroadcastReceiver() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex());
-        filter.addAction(Tool.CustomBroadcast.NULLSERSOR.getIndex());
-        customBroadCastReceiver = new CustomBroadCastReceiver();
-        registerReceiver(customBroadCastReceiver, filter);
-    }
-
-    private class CustomBroadCastReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String actionStr = intent.getAction().toString();
-            if (actionStr.equals(Tool.CustomBroadcast.UPDATASTEPNUMBER.getIndex())) {
-                int todayStepNumber = intent.getExtras().getInt(String.valueOf(Tool.MessageType.CURRENTSTEPNUMBERKEY.getIndex()));
-                ((SportsShowFragment) mSportsShowFragment).updateTodayStopNumber(todayStepNumber);
-            } else if (actionStr.equals(Tool.CustomBroadcast.NULLSERSOR.getIndex())) {
-                tool.hintMessage(MainActivity.this, "该设备没有适合的传感器");
-                //停止服务
-                stopService(serviceIntent);
-            }
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //注销广播接收者
-        unregisterReceiver(customBroadCastReceiver);
-        Log.v("message", "MainActivity注销");
     }
 }
