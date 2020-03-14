@@ -52,6 +52,10 @@
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_sports_circle.xml"
     },
     {
+        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_recent_step_count.xml.flat",
+        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_recent_step_count.xml"
+    },
+    {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_add_route.png.flat",
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\add_route.png"
     },
@@ -134,10 +138,6 @@
     {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sports_circle_red.png.flat",
         "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\drawable\\sports_circle_red.png"
-    },
-    {
-        "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_detailed_data.xml.flat",
-        "source": "E:\\Code\\android\\NightRunning\\app\\src\\main\\res\\layout\\fragment_detailed_data.xml"
     },
     {
         "merged": "E:\\Code\\android\\NightRunning\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",

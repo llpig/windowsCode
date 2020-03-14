@@ -21,6 +21,8 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        //添加图表库MPAndroidChart中央库地址
+        maven { url "https://jitpack.io" }
     }
 }
 

@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Process;
 import android.util.Log;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent serviceIntent;
     private Button mButtonUserAvatar, mButtonSportsShow, mButtonRunning, mButtonSportsCircle;
     public Fragment mLastFragment, mSportsShowFragment, mRunningFragment, mSportsCircleFragment;
+    public String userName;
+    public NightRunningDatabase helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private void initActivity() {
         //取消App的标题栏
         getSupportActionBar().hide();
+        //从文件中读取用户名
+        userName=getSharedPreferences("test1",MODE_PRIVATE).getString("userName","");
+        helper=new NightRunningDatabase(this, "NightRunning", null, 1);
         findViewAndSetOnClickListener();
         mTextViewTitle = findViewById(R.id.TextViewTitle);
         mSportsShowFragment = new SportsShowFragment();

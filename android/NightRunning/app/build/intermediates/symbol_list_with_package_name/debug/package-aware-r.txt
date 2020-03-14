@@ -403,6 +403,7 @@ color colorAccent
 color colorBlack
 color colorPrimary
 color colorPrimaryDark
+color colorPurple
 color colorRed
 color colorYellow
 color dim_foreground_disabled_material_dark
@@ -709,21 +710,12 @@ id EditTextUserName
 id FUNCTION
 id ImageViewUserAvatar
 id LayoutContent
-id LayoutDetailedData
 id LayoutLogin
 id LayoutMainActivity
-id LayoutNormalModeDetailedData
 id LayoutRegistered
-id LayoutRunningModeDetailedData
 id META
 id SHIFT
 id SYM
-id TextViewDetailedDataCalories
-id TextViewDetailedDataMileage
-id TextViewDetailedDataSpeed
-id TextViewDetailedDataStopNumber
-id TextViewDetailedDataTime
-id TextViewDetailedDataTitle
 id TextViewForgetPassword
 id TextViewLoginStart
 id TextViewRegistered
@@ -848,6 +840,7 @@ id percent
 id progress_circular
 id progress_horizontal
 id radio
+id recentExerciseDataDisplay
 id right
 id right_icon
 id right_side
@@ -879,6 +872,7 @@ id src_in
 id src_over
 id standard
 id start
+id stepNumberChart
 id submenuarrow
 id submit_area
 id tabMode
@@ -952,7 +946,7 @@ layout activity_personal_center
 layout activity_user_login
 layout activity_user_registered
 layout custom_dialog
-layout fragment_detailed_data
+layout fragment_recent_step_count
 layout fragment_running
 layout fragment_sports_circle
 layout fragment_sports_show

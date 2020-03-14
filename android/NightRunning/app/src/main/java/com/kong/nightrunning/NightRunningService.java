@@ -45,6 +45,7 @@ public class NightRunningService extends Service {
         return null;
     }
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -150,8 +151,8 @@ public class NightRunningService extends Service {
         registerReceiver(broadcastReceiver, filter);
     }
 
-    public void sensorUpdateData(int startStepNumber){
-        helper.upDateRecordsToMotionInfoTableNormal(db,userName,"date('now','localtime')",startStepNumber,0);
+    public void sensorUpdateData(int startStepNumber) {
+        helper.upDateRecordsToMotionInfoTableNormal(db, userName, "date('now','localtime')", startStepNumber, 0);
     }
 
     @Override

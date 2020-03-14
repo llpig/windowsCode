@@ -7,6 +7,7 @@ INJECTED from E:\Code\android\NightRunning\app\src\main\AndroidManifest.xml:2:1-
 MERGED from [com.amitshekhar.android:debug-db:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\c8159bd9d4afe39948adba0ad576d617\jetified-debug-db-1.0.0\AndroidManifest.xml:20:1-40:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\637e87538cdf6aea5141591760a2054a\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\bee80d886c07f2c4ad70dc7f688d2de0\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:2:1-20:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1188dea4964e3679c4558ac5cf5ba796\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\494d944d55cf865756cb5e48788cf52d\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\de0babc5bb30b697c366eb4d7935df44\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -109,6 +110,8 @@ MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\637e87538cdf6aea5141591760a2054a\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1a39af07be07f37158592ca59158a49a\constraintlayout-1.1.3\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\bee80d886c07f2c4ad70dc7f688d2de0\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:16:5-18:41
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\bee80d886c07f2c4ad70dc7f688d2de0\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:16:5-18:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1188dea4964e3679c4558ac5cf5ba796\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\1188dea4964e3679c4558ac5cf5ba796\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\¿×³¿Èð\.gradle\caches\transforms-2\files-2.1\494d944d55cf865756cb5e48788cf52d\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41

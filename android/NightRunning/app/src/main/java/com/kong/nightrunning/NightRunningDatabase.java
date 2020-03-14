@@ -9,6 +9,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NightRunningDatabase extends SQLiteOpenHelper {
     //表名,字段
     private Tool tool = new Tool();
@@ -114,6 +117,7 @@ public class NightRunningDatabase extends SQLiteOpenHelper {
         return values;
     }
 
+
     //更新记录(运行信息表,普通)
     public boolean upDateRecordsToMotionInfoTableNormal(SQLiteDatabase db, String userName, String date,
                                                         int stepNumber, int equipmentInfo) {
@@ -137,6 +141,20 @@ public class NightRunningDatabase extends SQLiteOpenHelper {
             values.put(nightRunningDB.motionInfoTable.runningFinishTime, runningFinishTime);
         }
         return (db.update(nightRunningDB.motionInfoTable.tableName, values, whereStr, null) != 1 ? false : true);
+    }
+
+    //查询近七天的数据
+    public List<Float> selectRecentTimeStepNumber(SQLiteDatabase db, String userName, String date) {
+        List<Float> stepNumberList = new ArrayList<Float>();
+        String whereStr = nightRunningDB.motionInfoTable.date + ">=(select(" + date + ")) and " +
+                nightRunningDB.motionInfoTable.userName + "=\"" + userName + "\"";
+        String[] select = new String[]{
+                nightRunningDB.motionInfoTable.stepNumber};
+        Cursor cursor = db.query(nightRunningDB.motionInfoTable.tableName, select, whereStr, null, null, null, null);
+        while (cursor.moveToNext()) {
+            stepNumberList.add(new Float(cursor.getInt(cursor.getColumnIndex(nightRunningDB.motionInfoTable.stepNumber))));
+        }
+        return stepNumberList;
     }
 
     //返回运动轨迹表的SQL语句
@@ -178,7 +196,6 @@ public class NightRunningDatabase extends SQLiteOpenHelper {
         values.put(nightRunningDB.achievementTable.achievement, achievement);
         return (db.insert(nightRunningDB.achievementTable.tableName, null, values) == -1 ? false : true);
     }
-
 
     //更新数据库版本是调用
     @Override

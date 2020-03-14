@@ -21,15 +21,8 @@ import java.util.TimerTask;
 public class SportsShowFragment extends Fragment {
 
     private SensorHandler handler;
-    private FragmentTransaction fragmentTransaction;
+    private int lastTodayAddStepNumber, todayAddStepNumber;
     private TextView mTextViewTodayNumber, mTextViewTargetNumber;
-    private DetailedDataFragment mDetailedDataFragment, mNormalModeDetailedDataFragment, mRunningModeDetailedFragment;
-
-    SportsShowFragment() {
-        mDetailedDataFragment = new DetailedDataFragment();
-        mNormalModeDetailedDataFragment = new DetailedDataFragment();
-        mRunningModeDetailedFragment = new DetailedDataFragment();
-    }
 
     @Nullable
     @Override
@@ -48,24 +41,28 @@ public class SportsShowFragment extends Fragment {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Message message = new Message();
-                message.arg1 = NightRunningSensorEventListener.getTodayAddStepNumber();
-                handler.sendMessage(message);
+                todayAddStepNumber = NightRunningSensorEventListener.getTodayAddStepNumber();
+                if (lastTodayAddStepNumber != todayAddStepNumber) {
+                    Message message = new Message();
+                    message.arg1 = todayAddStepNumber;
+                    handler.sendMessage(message);
+                    lastTodayAddStepNumber = todayAddStepNumber;
+                }
             }
         };
         Timer timer = new Timer();
-        //每隔30s，检测一次数据，如果数据有更新则发送一次广播，通知UI线程更新UI
+        //每隔3，检测一次数据，如果数据有更新则发送一次广播，通知UI线程更新UI
         timer.schedule(timerTask, delayTime, periodTime);
     }
 
     private void findView(View view) {
+        todayAddStepNumber = NightRunningSensorEventListener.getTodayAddStepNumber();
         mTextViewTodayNumber = view.findViewById(R.id.TextViewTodayNumber);
+        mTextViewTodayNumber.setText(String.valueOf(todayAddStepNumber));
         mTextViewTargetNumber = view.findViewById(R.id.TextViewTargetNumber);
-
-        fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.LayoutDetailedData, mDetailedDataFragment);
-        fragmentTransaction.add(R.id.LayoutNormalModeDetailedData, mNormalModeDetailedDataFragment);
-        fragmentTransaction.add(R.id.LayoutRunningModeDetailedData, mRunningModeDetailedFragment);
+        StepNumberChartFragment chartFragment=new StepNumberChartFragment();
+        FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.recentExerciseDataDisplay,chartFragment);
         fragmentTransaction.commit();
     }
 
@@ -73,7 +70,6 @@ public class SportsShowFragment extends Fragment {
     //更新今日步数
     public void updateTodayStopNumber(int stopNumber) {
         mTextViewTodayNumber.setText(String.valueOf(stopNumber));
-        updateDetailedData();
     }
 
     //更新目标步数
@@ -81,11 +77,6 @@ public class SportsShowFragment extends Fragment {
         mTextViewTargetNumber.setText("目标步数:" + String.valueOf(targetNumber));
     }
 
-    //更新详细数据
-    private void updateDetailedData() {
-        mNormalModeDetailedDataFragment.setTextViewData("普通模式", "0", "0", "0", "0", "0");
-        mRunningModeDetailedFragment.setTextViewData("跑步模式", "0", "0", "0", "0", "0");
-    }
 
     private class SensorHandler extends Handler {
         public void handleMessage(Message message) {

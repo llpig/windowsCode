@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:background="@color/colorAccent"
         android:orientation="vertical">
 
@@ -31,74 +31,46 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="详细数据"
-            android:textSize="15sp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="5"
         android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/LayoutDetailedData"
+            android:id="@+id/recentExerciseDataDisplay"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/LayoutNormalModeDetailedData"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/LayoutRunningModeDetailedData"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-        </FrameLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorRed"
-        android:orientation="vertical">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@color/colorRed"-->
+<!--        android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="今天消耗的热量相当于100片薯片。"
-            android:maxLines="1"
-            android:textSize="25sp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:maxLines="1"-->
+<!--            android:text="今天消耗的热量相当于100片薯片。"-->
+<!--            android:textSize="25sp" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:maxLines="1"
-            android:text="今日计划完成度:"
-            android:textSize="25sp" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:maxLines="1"-->
+<!--            android:text="今日计划完成度:"-->
+<!--            android:textSize="25sp" />-->
+<!--    </LinearLayout>-->
 
 </LinearLayout>

@@ -109,8 +109,6 @@ public class NightRunningSensorEventListener implements SensorEventListener {
         } else {
             todayAddStepNumber = value + mStartStepNumber;
         }
-        Log.v("message","value:"+value);
-
     }
 
     //单步记步传感器
@@ -144,13 +142,7 @@ public class NightRunningSensorEventListener implements SensorEventListener {
                 if (timeOfNow - timeOfLastPeak >= TimeInterval
                         && (peakOfWave - valleyOfWave >= ThreadValue)) {
                     timeOfThisPeak = timeOfNow;
-                    /*
-                     * 更新界面的处理，不涉及到算法
-                     * 一般在通知更新界面之前，增加下面处理，为了处理无效运动：
-                     * 1.连续记录10才开始计步
-                     * 2.例如记录的9步用户停住超过3秒，则前面的记录失效，下次从头开始
-                     * 3.连续记录了9步用户还在运动，之前的数据才有效
-                     * */
+                    //统计步数
                     mStartStepNumber += 1;
                     todayAddStepNumber = mStartStepNumber;
                 }
