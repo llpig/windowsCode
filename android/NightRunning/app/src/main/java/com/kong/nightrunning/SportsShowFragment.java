@@ -23,6 +23,7 @@ public class SportsShowFragment extends Fragment {
     private SensorHandler handler;
     private int lastTodayAddStepNumber, todayAddStepNumber;
     private TextView mTextViewTodayNumber, mTextViewTargetNumber;
+    private StepNumberChartFragment chartFragment=null;
 
     @Nullable
     @Override
@@ -47,6 +48,7 @@ public class SportsShowFragment extends Fragment {
                     message.arg1 = todayAddStepNumber;
                     handler.sendMessage(message);
                     lastTodayAddStepNumber = todayAddStepNumber;
+
                 }
             }
         };
@@ -60,7 +62,9 @@ public class SportsShowFragment extends Fragment {
         mTextViewTodayNumber = view.findViewById(R.id.TextViewTodayNumber);
         mTextViewTodayNumber.setText(String.valueOf(todayAddStepNumber));
         mTextViewTargetNumber = view.findViewById(R.id.TextViewTargetNumber);
-        StepNumberChartFragment chartFragment=new StepNumberChartFragment();
+        if(chartFragment==null){
+            chartFragment=new StepNumberChartFragment();
+        }
         FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.recentExerciseDataDisplay,chartFragment);
         fragmentTransaction.commit();
@@ -81,6 +85,7 @@ public class SportsShowFragment extends Fragment {
     private class SensorHandler extends Handler {
         public void handleMessage(Message message) {
             updateTodayStopNumber(message.arg1);
+            chartFragment.manager.drawCombinedChart();
         }
     }
 

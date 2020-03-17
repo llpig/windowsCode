@@ -40,13 +40,14 @@ import java.util.Random;
 public class StepNumberChartFragment extends Fragment {
 
     private CombinedChart stepNumberChart;
+    public CombinedChartManager manager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent_step_count, container, false);
         stepNumberChart = view.findViewById(R.id.stepNumberChart);
-        CombinedChartManager manager = new CombinedChartManager(stepNumberChart);
+         manager = new CombinedChartManager(stepNumberChart);
         List<Float> barYValues = manager.getBarYAxisValues();
         List<Float> lineYValues = manager.getLineYAxisValues(barYValues);
         List<String> xAxisValues = manager.getXAxisValues(barYValues.size());
@@ -107,8 +108,6 @@ public class StepNumberChartFragment extends Fragment {
             rightAxis.setDrawLabels(false);
             rightAxis.setAxisMinimum(0f);
             rightAxis.setEnabled(false);
-
-            xAxis.setEnabled(false);
 
             mCombinedChart.animateX(0); // 立即执行的动画,x轴
         }
@@ -217,7 +216,6 @@ public class StepNumberChartFragment extends Fragment {
             setXAxis(xAxisValues);
 
             CombinedData combinedData = new CombinedData();
-
             combinedData.setData(getBarData(barChartY, barName, barColor));
             combinedData.setData(getLineData(lineChartY, lineName, lineColor));
             mCombinedChart.setData(combinedData);
@@ -238,7 +236,10 @@ public class StepNumberChartFragment extends Fragment {
 
         public List<Float> getBarYAxisValues() {
             NightRunningDatabase helper = ((MainActivity) getActivity()).helper;
-            return helper.selectRecentTimeStepNumber(helper.getReadableDatabase(), "测试1", "date('now','localtime','-7 days')");
+            List<Float> barYAxisValues= helper.selectRecentTimeStepNumber(helper.getReadableDatabase(), "测试1", "date('now','localtime','-7 days')");
+            barYAxisValues.remove(barYAxisValues.size()-1);
+            barYAxisValues.add(new Float(NightRunningSensorEventListener.getTodayAddStepNumber()));
+            return barYAxisValues;
         }
 
         public List<Float> getLineYAxisValues(List<Float> barYAxisValues) {
@@ -248,6 +249,14 @@ public class StepNumberChartFragment extends Fragment {
                 lineYAXisValues.add(new Float((barYAxisValues.get(i) * 50 * 0.8) / 100));
             }
             return lineYAXisValues;
+        }
+
+        public void drawCombinedChart(){
+            CombinedData combinedData = new CombinedData();
+            combinedData.setData(getBarData(getBarYAxisValues(), "步数(步)", Color.rgb(128, 0, 255)));
+            combinedData.setData(getLineData(getLineYAxisValues(getBarYAxisValues()), "卡路里(百卡)", Color.rgb(255, 128, 0)));
+            mCombinedChart.setData(combinedData);
+            mCombinedChart.invalidate();
         }
 
     }
